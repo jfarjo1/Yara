@@ -1,0 +1,419 @@
+//
+//  Localizable.strings
+//  Yara
+//
+//  Created by Johnny Owayed on 15/10/2024.
+//
+
+"explore" = "Explore";
+"where_next" = "Where next?";
+"empty_country" = "It looks like our eSIMs are still getting their visas for that country! Hang tight!";
+"request_to_add" = "Request to add";
+"search_for_your_destination" = "Search for your destination";
+"redeem_discount_label" = "Invite friends\nto earn $3";
+"promo_code_welcome" = "Referral Program";
+"single_country" = "Local";
+"regional_plan" = "Regional Plans";
+"popular_destination" = "Popular Destinations";
+"esim_compatiblity" = "eSIM compatibility";
+"this_device_does_not_support" = "This device doesn't support eSims.";
+"ok" = "OK";
+"coming_soon" = "Coming soon!";
+"regional_plans_soon" = "Regional plans are coming soon...";
+
+"saudi_arabia" = "Saudi Arabia";
+"france" = "France";
+"australia" = "Australia";
+"united_states" = "United States";
+"italy" = "Italy";
+"united_kingdom" = "United Kingdom";
+"spain" = "Spain";
+"turkey" = "Turkey";
+"germany" = "Germany";
+"see_all" = "See All";
+"qatar" = "Qatar";
+"thailand" = "Thailand";
+"uae" = "UAE";
+"japan" = "Japan";
+"china" = "China";
+"mexico" = "Mexico";
+"canada" = "Canada";
+"argentina" = "Argentina";
+"brazil" = "Brazil";
+"peru" = "Peru";
+"palestine" = "Palestine";
+"americas"="Americas";
+"asia"="Asia";
+"europe"="Europe";
+
+//Settings
+"account" = "Account";
+"profile" = "Profile";
+"loading" = "Loading...";
+"languages"="Languages";
+"settings" = "Settings";
+"live_chat" = "Live chat";
+"share_app" = "Share app";
+"help" = "Help";
+"privacy" = "Privacy";
+"terms" = "Terms";
+"sign_out" = "Sign out";
+"delete_account" = "Delete Account";
+"are_you_sure_want_sign_out" = "Are you sure you want to sign out?";
+"are_you_sure_want_delete_account" = "Are you sure you want to delete your account?";
+"login_required" = "Login Required";
+"to_perform_this_action" = "To Perform this action you have to login again. Do you want to continue?";
+"whatsapp_us" = "WhatsApp us";
+"need_help_email" = "Email";
+"close" = "Close";
+"yes" = "Yes";
+"no" = "No";
+
+"edit_email" = "Edit Email";
+"change_password" = "Change Password";
+"edit_first_name" = "Edit First Name";
+"edit_last_name" = "Edit Last Name";
+"update_notificaitons_settings" = "Update Notifications Settings";
+"update_gender" = "Update Gender";
+"update_date_of_birth" = "Update Date Of Birth";
+"change_display_picture" = "Change Display Picture";
+
+"whats_email" = "What's your email?";
+"lets_create_an_account_with_email_address" = "Let's create an account with your email address";
+"please_edit_email" = "Please edit your email address";
+"email_placeholder" = "Email";
+"next" = "Next";
+"update" = "Update";
+"email_empty" = "Email Empty";
+"please_make_sure_to_enter_email" = "Please make sure to enter a valid email address.";
+
+"whats_firstname" = "What's your first name?";
+"choose_display_name" = "Choose a display name.";
+"first_name_placeholder" = "First Name";
+"first_name_empty" = "First Name Empty";
+"please_make_sure_enter_first_name" = "Please make sure to enter your first name.";
+
+"choose_password" = "Choose a password";
+"create_secure_password" = "Create a password linked to your account";
+"password_placeholder" = "Password";
+"creating_account" = "Creating your account...";
+"password_empty" = "Password Empty";
+"please_make_sure_enter_password" = "Please make sure to enter your password.";
+"registration_failure" = "Registration Failure";
+"email_please_go_login_page" = " If it's your email please go to the login page.";
+
+"whats_lastname" = "What's your last name?";
+"now_please_enter_last_name" = "Now, please enter your last name.";
+"last_name_placeholder" = "Last Name";
+"please_enter_last_name" = "Please enter your last name.";
+"last_name_empty" = "Last Name Empty";
+"please_make_sure_to_enter_last_name" = "Please make sure to enter your last name.";
+
+"stay_in_loop" = "Stay in the loop";
+"get_notified_about_data" = "Avoid the 'Oops, I ran out of data' moment! Let Simly keep you posted when it's time to top up";
+"notifications" = "Notifications";
+"enable_now" = "Enable now";
+"enabled" = "Enabled";
+"we_wont_spam" = "We won't spam you, we promise!";
+"skip" = "Skip";
+
+"when_your_birthday" = "When's your birthday?";
+"you_must_13" = "You must be 13+ to use Simly.";
+"please_make_sure_correct" = "🎉 You're %d years old. Please make sure that's correct before pressing Next.";
+"sorry_too_young" = "🎉 You're %d years old. Sorry, you're too young to use Simly.";
+
+"choose_gender" = "Choose gender";
+"choose_your_gender_identity" = "Choose your gender identity";
+"male" = "Male";
+"female" = "Female";
+"other" = "Other";
+"id_prefer_not_to_stay" = "I'd prefer not to say";
+"your_gender_is_only_used_to_help" = "Your gender is only used to help with filter matches";
+
+"add_profile_image" = "Add profile image";
+"add_profile_image_firends" = "Add a profile image so your friends can recognize you";
+"shake_your_device" = "Shake your device for another random avatar :)";
+
+//Sign in
+"enter_your_email" = "Enter your email";
+"please_enter_your_email_address" = "Please enter your email address";
+"please_make_sure_to_enter_your_email" = "Please make sure to enter your email and request a new verification link.";
+
+"enter_your_password" = "Enter your password";
+"please_enter_your_password" = "Please enter your password";
+"signin_failure" = "Sign in Failure";
+
+//Main
+"plans" = "Plans";
+"GB" = "GB";
+"days" = "Days";
+"day"="Day";
+"buy_now" = " Buy Now";
+"data" = "Data";
+"validity" = "Validity";
+
+"plan_details" = "Plan Details";
+"not_required" = "Not Required";
+"data_only" = "Data Only";
+"global_network" = "Global Network";
+"dataonly" = "Data Only";
+"validity_period_starts" = "The validity period starts when the SIM connects to any supported networks.";
+"noapn" = "NOAPN";
+"supported_countries" = "Supported Countries";
+"this_esim_supported" = "This eSIM is supported in ";
+"about_eSIMs" = "About eSIMs";
+"esims_works_the_same_way" = "eSIM works the same way as a traditional SIM card, but you don’t need a physical SIM card to use it. It is actually pre-installed in the device and you can activate it by installing the “eSIM profile” of a new operator.";
+"additional_information" = "Additional Information";
+"network" = "Network";
+"plan_type" = "Plan Type";
+"activation_policy" = "Activation Policy";
+"eKYC" = "eKYC";
+"buy_now_label" = "Buy Now";
+"order_summary" = "Order Summary";
+"apply_promo_code" = "Apply promo code";
+"enter_promo_code_here" = "Enter promo code here";
+"apply" = "Apply";
+"applied"="Applied";
+"oops"="Oops";
+"success"="Success";
+"total_price" = "Total Price";
+"applying" = "Applying...";
+"promo_code_empty" = "Promo Code Empty";
+"please_make_sure_to_promo_code" = "Please make sure to enter a promo code.";
+"promo_code_applied" = "Promo Code Applied";
+"something_went_wrong." = "Something went wrong, try again later.";
+"buy" = "Buy";
+"price" = "Price";
+
+"my_eSIMs" = "My eSIMs";
+"expired" = "Expired";
+"current" = "Current";
+"turn_off_eSIM" = "Turn off eSIM";
+"please_make_turn_off_travel" = "Please make sure you turn off your travel eSIM. Hope you had a great trip!";
+"eSIM_expired" = "eSIM has expired";
+"terminated" = "Terminated";
+"pending" = "Pending";
+"expiry_date_will_start_active" = "Expiry date will start once eSIM is active";
+"active" = "Active";
+"eSIM_is_valid_for" = "eSIM is valid for ";
+"used_from" = "used from ";
+"top_up" = "Top up";
+"view" = "View";
+"view_all" = "View all";
+"valid_for" = "Valid for";
+"one_moment_please" = "One moment please...";
+
+"stay_connected" = "Stay Connected Everywhere";
+"sign_in" = "Sign in";
+"sign_up_apple" = "Sign up with Apple";
+"sign_up_email" = "Sign up with Email";
+"already_have_account" = "Already have an account?";
+"by_tapping_sign_in" = "By tapping Sign up to using Simly you agree to our terms and privacy policy.";
+"login" = "Login";
+"setting_up_ur_profile" = "Setting up your profile...";
+"error_create_account" = "Error 223";
+"an_error_occured_support" = "An error has occured please contact support.";
+"welcome_to_simly" = "Welcome to Simly!";
+"error_create_account_other" = "Error 118";
+"simly" = "Simly";
+"copied_to_clipboard" = "' copied to clipboard ";
+
+// ESimDetailsViewController
+"iccid_nb" = "ICCID NUMBER";
+"UID" = "UID";
+"trans_id" = "Transaction ID";
+"coverage" = "COVERAGE";
+"APN" = "APN";
+"date" = "Date";
+"provider" = "Provider";
+"topup_available" = "TOP-UP AVAILABLE";
+"available" = "Available";
+"not_available"="Not Available";
+
+"dont_have_any_rewards" = "You don’t have any rewards yet.";
+"reward_history" = "Reward History";
+"share_referal" = "Share your referral code";
+"referal_desc" = "For every friend that purchases on Simly, you get $3 credit and they get $3 off! Terms & Conditions";
+"you_referal_code" = "Your referral code";
+"refer_and_earn" = "Refer & Earn";
+"share_now" = "Share now";
+"used" = "Used";
+"active" = "Active";
+
+"your_esim_title" = "Your eSIM";
+"qr_code" = "QR Code";
+"manual" = "Manual";
+"here_your_esim" = "Here is your eSIM!";
+"sm_dp_address" = "SM-DP+ ADDRESS";
+"activation_code" = "ACTIVATION CODE";
+"copy_this_information" = "Copy this information and enter details manually to install your eSIM. Make sure your device has a stable internet connection before installing.";
+"warning_remove_esim" = "WARNING! Make sure to install your eSIM before you travel. Please note that most eSIMs cannot be reinstalled if deleted.";
+"step_1" = "Step 1";
+"need_help_view_tutorials" = "Need help?\nlive chat with us";
+"step_2" = "Step 2";
+"need_help_step_guide" = "Need help?\nlive chat with our support";
+"done" = "Done";
+"data_roaming" = "Data Roaming";
+
+"scan_qr_code_printing" = "Scan the QR code by printing out or displaying the code on another device to install your SIM. Make sure your device has a stable internet connection before installing.";
+"step_one_detail" = "1. Go to Settings > Cellular/Mobile > Add Cellular/Mobile Plan.\n2. ﻿﻿﻿Scan the QR Code.\n3. ﻿﻿﻿Tap on 'Add Cellular Plan'.\n4. ﻿﻿﻿Label the eSIM as 'Simly - %@'.\n5 ﻿﻿﻿Choose your primary line to call or send messages.\n6. ﻿﻿﻿Choose your primary line to use with iMessage, FaceTime.\n8. ﻿﻿﻿Choose the eSIM plan as your default line for Cellular Data and do not turn on 'Allow Cellular Data Switching' to prevent charges on your other line.";
+
+"automatic"="Automatic";
+"automatic_details_text"="Make sure your device has a stable internet connection before installing.";
+"tap_button_install_esim" = "Tap to install eSIM";
+"step_one_automatic" = "1. Press on “Tap to install eSIM”. \n2. Label the eSIM as 'Simly - %@’. \n3. ﻿﻿﻿Choose your primary line to call or send messages.\n4. ﻿﻿﻿Choose your primary line to use with iMessage, FaceTime.\n5. ﻿﻿﻿Choose the eSIM plan as your default line for Cellular Data and do not turn on 'Allow Cellular Data Switching' to prevent charges on your other line.";
+
+"step_one_detail_ios17" = "1. ﻿﻿Take a screenshot ﻿of this screen\n2. ﻿﻿﻿Go to Settings > Cellular > Add eSIM.\n3. ﻿﻿﻿Tap on ‘Use QR Code’ then ‘Open Photos’ and select the screenshot.\n4. ﻿﻿﻿Label the eSIM as 'Simly - %@’.\n5. ﻿﻿Choose your primary line to call or send messages.\n6. ﻿﻿﻿Choose your primary line to use with iMessage, Face Time.\n8. Choose the eSIM plan as your default line for Cellular Data and do not turn on 'Allow Cellular Data Switching' to prevent charges on your other line.";
+"destination" = "Destination";
+"step_two_detail" = "1. ﻿﻿﻿Select your Simly eSIM under 'Cellular Plans'.\n2. ﻿﻿﻿Ensure that 'Turn On This Line' is toggled on.\n3. ﻿﻿﻿Go to 'Network Selection' and select the network.\n4. ﻿﻿﻿Turn on the Data Roaming.\n5. ﻿﻿﻿Need help? Chat with us.";
+
+"step_two_detail_without_roaming" = "1. ﻿﻿﻿Select your Simly eSIM under 'Cellular Plans'.\n2. ﻿﻿﻿Ensure that 'Turn On This Line' is toggled on.\n3. ﻿﻿﻿Go to 'Network Selection' and select the network.\n4. ﻿﻿﻿Need help? Chat with us. ﻿﻿﻿";
+
+"step_one_manual_detail" = "1. Go to Settings > Cellular/Mobile > Add Cellular/ Mobile Plan.\n2. Tap on 'Enter Details Manually.\n3. Enter your SM-DP+ Address and Activation Code.\n4. ﻿﻿﻿Tap on 'Add Cellular Plan'.\n5. ﻿﻿﻿Label the eSIM as 'Simly - %@'.\n6. ﻿﻿﻿Choose your primary line to call or send messages.\n7. ﻿﻿﻿Choose your primary line to use with iMessage, FaceTime.\n8. ﻿﻿﻿Choose the eSIM plan as your default line for Cellular Data and do not turn on 'Allow Cellular Data Switching' to prevent charges on your other line.";
+"step_two_manual_detail" = "1. ﻿﻿﻿Select your Simly eSIM under 'Cellular Plans'.\n2. ﻿﻿﻿Ensure that 'Turn On This Line' is toggled on.\n3. ﻿﻿﻿Go to 'Network Selection' and select the supported network.\n4. ﻿﻿﻿Turn on the Data Roaming.\n5. ﻿﻿﻿Need help? Chat with us.";
+"step_two_manual_detail_without_roaming" = "1. ﻿﻿﻿Select your Simly eSIM under 'Cellular Plans'.\n2. ﻿﻿﻿Ensure that 'Turn On This Line' is toggled on.\n3. ﻿﻿﻿Go to 'Network Selection' and select the supported network.\n4. ﻿﻿﻿Need help? Chat with us.";
+"warning" = "WARNING!";
+"need_help" = "Need help?";
+"apn_set_automatically" = "The APN is set automatically";
+"up_to_label" = "Up to $3 off";
+"simly_desc_label" = "Give $3 and get $3 off your next eSIM";
+"regional" = "Regional";
+"global" = "Global";
+"destination" = "destinations";
+
+"welcome_to" = "Welcome to";
+"global_label" = "Global 🌎";
+
+"esim_details" = "eSIM Details";
+
+//Plan Summary Details ViewController
+"works_in" = "Works in";
+"apply_code" = "Apply code";
+"enter_referral_code" = "Enter referral or promo code";
+"redeem" = "Redeem";
+"more_info" = "More Info";
+"note_plan_summary" = "Before completing this order, please confirm your device is eSIM compatible and network-unlocked";
+
+"supported_networks" = "Supported Networks";
+"got_it" = "Got it";
+
+"pending" = "Pending";
+"pending_installation" = "Pending Installation";
+"pending_activation" = "Pending Activation";
+"active" = "Active";
+"e_sim_waiting_for_activation" = "eSIM waiting for activation";
+"e_sim_has_not_been_installed" = "eSIM has not been installed";
+"e_sim_has_been_installed" = "eSIM has been installed";
+"plan_valid_for_days" = "Plan is still valid for %d days";
+"plan_has_been_fully_used" = "Plan has been fully used";
+"plan_has_expired" = "Plan has expired";
+"e_sim_is_still_valid" = "eSIM is still valid";
+"my_e_sims_default" = "eSIM details are on a\npaper jet, arriving soon!";
+"my_e_sims_deleted" = "eSIM has been deleted!\nReady to dig up a new one?";
+"activate" = "Activate";
+"delete" = "Delete";
+"install" = "Install";
+"buy_e_sim" = "Buy eSIM";
+"top_up_esim" = "Top Up";
+"by_a_plan" = "Buy a plan";
+"language_popup_title"="Language Updated";
+"language_popup_subtitle"="Please close and then reopen the app for the best experience in this language.";
+"select_language"="Select Language";
+
+"esim_not_supported" = "eSIM not supported";
+"esim_not_supported_detail" = "Whoops! Looks like your current device\nis still living in the \'pre-eSIM\' era.\nBut don\'t worry! You can still purchase\nyour eSIM here and install it on a future\n-ready device.";
+
+"esim_supported" = "eSIM supported";
+"esim_supported_detail" = "Great news! Your device is eSIM ready.\nIt\'s like having a digital key to the\nworld\'s data doors.";
+"about_to_ride" = "About to ride off into the sunset?\nWe'll be here when you're ready to\nconnect again.";
+"learn_more" = "Learn more";
+
+"access_data_steps" = "Access Data Steps";
+"installed_esim_successfully" = "You’ve installed your eSIM successfully";
+"get_data_when_land" = "To get data when you land:";
+"go_setting_first_part_1" = "1- Go to Settings > Cellular > Cellular Data -> ";
+"go_setting_first_part_1_without_number" = "Go to Settings > Cellular > Cellular Data -> ";
+"go_setting_first_part_2" = "choose your Simly eSIM";
+
+"go_setting_second_part_1" = "2- Go to Settings > Cellular > Cellular Data -> choose your Simly eSIM > ";
+"go_setting_second_part_2" = "turn ON data roaming";
+"view_all_steps" = "View all steps";
+"reset_password_title" = "Password playing hide and seek?\nLet's find you a new one!";
+"reset_it" = "Reset it";
+"reset_email" = "Reset Email Sent";
+"reset_email_detail" = "We've sent a reset email. If it's not in your inbox, maybe it's hiding in the spam folder? Let's catch that sneaky thing!";
+
+"banner_title_2" = "Get your Europe plan";
+"banner_detail_2" = "Regional Packages";
+"banner_title_3" = "US Unlimited Data & Calls";
+"banner_detail_3" = "Monthly Plan";
+"rate_us_title" = "Rate Simly";
+"rate_us_detail" = "Enjoying the Simly journey?\nSlide the star bar all the way to 5 and help us light the way!";
+"enable_notifications" = "Enable Notifications";
+"disable_notifications" = "Disable Notifications";
+"allow_notifications" = "Allow Notifications";
+"lets_roll" = "Let's Roll";
+
+"esim_data_popup" = "Voila! Your eSIM just had a refill!\nWith those extra %@GBs, you're ready to conquer the digital world once again. ";
+"unlimited_esim_data_popup" = "Voila! Your eSIM just had a refill!\nWith those extra %@ Days, you're ready to conquer the digital world once again. ";
+"unlimited_esim_data_popup_one_day" = "Voila! Your eSIM just had a refill!\nWith those extra %@ Days, you're ready to conquer the digital world once again. ";
+"esim_data_popup_bold" = "%@GBs";
+"unlimited_esim_data_popup_bold" = "%@ Days";
+
+"my_device_support" = "My Device Support eSIMs?";
+"device_support_detail" = "iPhone XS and newer support eSIM to confirm that your device support eSIM, follow the steps below";
+"support_esim_detail" = "support eSIM";
+"option_1" = "Option 1";
+"dial_option" = "Dial *#06# to confirm an EID and\n2 IMEI are shown";
+"number_dial_option" = "*#06#";
+"press_here_to_check" = "Press here to check";
+"option_2" = "Option 2";
+"option_2_part_1" = "1- Go to Settings > Cellular > Add\neSIM and check if it’s shown";
+"option_2_part_1_bold_text" = "Add\neSIM";
+"option_2_part_2" = "2- Settings > General > About
+Check your device is network provider locked It should say “No SIM Restrictions”\nwhich means that the device is unlocked.";
+"option_2_part_2_bold_text" = "No SIM Restrictions";
+"change_language"="Change language";
+"languages"="Languages";
+"esim_empty_dataset"="No eSIMs here? That's like a runway without planes. Time to clear for takeoff!";
+"cancel"="Cancel";
+
+"unknown_error_message"="Something went wrong please try again.";
+"gender"="Gender";
+"date_of_birth"="Date of Birth";
+"notification_placeholder"="Receive notifications";
+"edit_profile"="Edit Profile";
+"camera"="Camera";
+"gallery"="Gallery";
+"receive_notifications"="Receive Notifications";
+
+
+"please_enter_your_new_email_address" = "Please enter your new email address";
+"enter_your_new_email" = "Enter your new email";
+"enter_your_new_password" = "Enter your new password";
+"please_enter_your_new_password" = "Please enter new your password";
+
+"pay_now" = "Pay Now";
+"pay_by_card" = "Pay by Card";
+"pay_using_whish" = "Pay using Whish";
+
+"payment_failed_popup_title" = "Payment Failed";
+"payment_failed_popup_subtitle" = "Please try again later.";
+
+"normal"="Normal";
+"unlimited"="Unlimited";
+
+"internet_error_title"="Oops, no internet!";
+"internet_error"="No connection! If you're abroad, double-check your Simly eSIM setup.";
+"change_currency"="Currency";
+"choose_currency"="Choose Currency";
+
+"global_connectivity"="Global Connectivity";
+"meet_simly"="Meet Simly";
+"united_arab_emirates"="United Arab Emirates";
+"new_way_connect"="A new way\nto connect.";
+"privacy_policy"="privacy policy";
+"our_terms"="terms";
+"onb1_title"="Get instant 5G abroad";
+"onb2_title"="Say bye to roaming fees";
+"onb3_title"="Easy setup & 24/7 support";
