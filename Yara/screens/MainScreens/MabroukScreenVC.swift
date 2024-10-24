@@ -50,4 +50,8 @@ class MabroukScreenVC: UIViewController {
         
         self.mabroukImage.layer.add(rotationAnimation, forKey: "rotationAnimation")
     }
+    
+    @IBAction func viewProgressButtonTapped(_ sender: Any) {
+        self.toMain(index: 1)
+    }
 }

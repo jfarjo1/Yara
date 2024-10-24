@@ -148,7 +148,7 @@ class EnterPassword: UIViewController, UITextFieldDelegate {
         learnMoreLabel.padding(4, 4, 5, 5)
         
         learnMoreLabel.backgroundColor = UIColor(hex: "#F9FAFB")
-        learnMoreLabel.roundCorners(.allCorners, radius: learnMoreLabel.frame.height / 2)
+        learnMoreLabel.layer.cornerRadius = learnMoreLabel.frame.height/2
         
         let learnMoreAttachment = NSTextAttachment()
         learnMoreAttachment.image = learnMoreLabel.imageWithView()
@@ -495,7 +495,7 @@ class EnterPassword: UIViewController, UITextFieldDelegate {
             
         } else {
             print("added email")
-            var userService = UserService()
+            let userService = UserService()
             userService.signIn(email: userEmail, password: password) { result in
                 switch result {
                 case .success(_):

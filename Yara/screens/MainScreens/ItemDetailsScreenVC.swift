@@ -32,11 +32,122 @@ class ItemDetailsScreenVC: UIViewController {
     private var fullTextHeight: CGFloat = 0
     private let initialTextViewHeight: CGFloat = 91
     
+    var apartment:Apartment? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
+        if let apartment = apartment {
+            updateUIWithApartment(apartment)
+        }
     }
+    
+    private func updateUIWithApartment(_ apartment: Apartment) {
+        // Update all content with actual data
+        title_label.text = apartment.name
+        
+        // Price button text with safe formatting
+        price_btn.setTitle("One time: \(apartment.oneTime)", for: .normal)
+        
+        // Monthly price with safe formatting
+        price_label.text = "and \(apartment.perMonth) monthly"
+        
+        description_textView.text = apartment.description
+        
+        // Update property details
+        area_label.text = apartment.area
+        property_label.text = apartment.propertySize
+        bedrooms_label.text = apartment.bedrooms
+        bathrooms_label.text = apartment.bathrooms
+        service_label.text = apartment.serviceCharge
+        
+        location_Btn.setTitleColor(UIColor(hex: "#222222"), for: .normal)
+        location_Btn.setTitle("Tap to view", for: .normal)
+        location_Btn.titleLabel?.font = CustomFont.semiBoldFont(size: 14)
+        
+        // Process and load images
+        let processedImageUrls = apartment.imageUrls.flatMap { urlString in
+            urlString.split(separator: " ").map(String.init)
+        }
+        
+        loadImages(from: processedImageUrls) { [weak self] images in
+            guard let self = self else { return }
+            if let carouselView = self.top_carousel.subviews.first as? ImageCarouselView {
+                // Safe string formatting for units left
+                let unitsLeftText = "\(apartment.unitsLeft) units left"
+                carouselView.configure(with: images, topLeftText: unitsLeftText)
+            }
+        }
+        
+        // Recalculate text view height for the new content
+        calculateFullTextHeight()
+    }
+    
+    // Helper method to safely format currency values
+    private func formatCurrency(_ value: Double) -> String {
+        return String(format: "%.2f$", value)
+    }
+    
+    private func setupCarouselWithApartmentImages(_ apartment: Apartment) {
+        guard let containerView = top_carousel else {
+            print("Error: Could not find carousel container view")
+            return
+        }
+        
+        let carouselView: ImageCarouselView
+        if let existingCarouselView = containerView.subviews.first as? ImageCarouselView {
+            carouselView = existingCarouselView
+        } else {
+            carouselView = ImageCarouselView()
+            carouselView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.addSubview(carouselView)
+            
+            NSLayoutConstraint.activate([
+                carouselView.topAnchor.constraint(equalTo: containerView.topAnchor),
+                carouselView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+                carouselView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+                carouselView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            ])
+        }
+        
+        // Process image URLs (they seem to be space-separated in the string)
+        let processedImageUrls = apartment.imageUrls.flatMap { urlString in
+            urlString.split(separator: " ").map(String.init)
+        }
+        
+        // Load images from URLs
+        loadImages(from: processedImageUrls) { images in
+            carouselView.configure(with: images, topLeftText: nil)
+            carouselView.hideTopLeftLabel()
+        }
+    }
+    
+    private func loadImages(from urls: [String], completion: @escaping ([UIImage]) -> Void) {
+        var images: [UIImage] = []
+        let group = DispatchGroup()
+        
+        for urlString in urls {
+            group.enter()
+            guard let url = URL(string: urlString) else {
+                group.leave()
+                continue
+            }
+            
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                defer { group.leave() }
+                
+                if let data = data, let image = UIImage(data: data) {
+                    images.append(image)
+                }
+            }.resume()
+        }
+        
+        group.notify(queue: .main) {
+            completion(images)
+        }
+    }
+    
     
     func setupUI() {
         self.setupCarouselView()
@@ -45,8 +156,8 @@ class ItemDetailsScreenVC: UIViewController {
         
         self.title_label.text = "Studio in Damac Maison Prive"
         
-        price_btn.setTitle("One time: $25k", for: .normal)
-        price_btn.roundCorners(UIRectCorner.allCorners, radius: 33/2)
+        price_btn.setTitle("One time: $25000k", for: .normal)
+        price_btn.layer.cornerRadius = 33/2
         price_btn.titleLabel?.font = CustomFont.semiBoldFont(size: 13)
         price_btn.setTitleColor(UIColor(hex: "#A9A9A9"), for: .normal)
         price_btn.applyGradient(colors: [(UIColor(hex:"#040404") ?? .black).cgColor, (UIColor(hex:"#636363") ?? .gray).cgColor])
@@ -55,7 +166,7 @@ class ItemDetailsScreenVC: UIViewController {
         price_label.textColor = UIColor(hex: "#999999")
         price_label.font = CustomFont.semiBoldFont(size: 13)
         
-        show_full.roundCorners(.allCorners, radius: 23/2)
+        show_full.layer.cornerRadius = 23/2
         show_full.setTitle("Show full description", for: .normal)
         show_full.backgroundColor = UIColor(hex: "#F8F8FA")
         show_full.titleLabel?.font = CustomFont.boldFont(size: 10)
@@ -152,50 +263,19 @@ class ItemDetailsScreenVC: UIViewController {
     @IBAction func buyNow(_ sender: Any) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "HowItWorksViewController") as! HowItWorksViewController
+        vc.apartment = self.apartment
         vc.modalTransitionStyle = .coverVertical
         vc.delegate = self
         self.present(vc, animated: true)
     }
     
     @IBAction func locationButtonPressed(_ sender: Any) {
-        openInMaps(latitude: 25.057535538800074, longitude: 55.21255807116383, name: "Dubai")
-    }
-    
-    func openInMaps(latitude: Double, longitude: Double, name: String) {
-        let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        
-        // Google Maps URL
-        let googleMapsURL = URL(string: "comgooglemaps://?q=\(latitude),\(longitude)&query=\(encodedName)")!
-        
-        // Apple Maps URL
-        let appleMapsURL = URL(string: "http://maps.apple.com/?q=\(encodedName)&ll=\(latitude),\(longitude)")!
-        
-        // Google Maps fallback URL (opens in browser if app is not installed)
-        let googleMapsFallbackURL = URL(string: "https://www.google.com/maps/search/?api=1&query=\(latitude),\(longitude)")!
-        
-        if UIApplication.shared.canOpenURL(googleMapsURL) {
-            // Google Maps is installed, open it
-            UIApplication.shared.open(googleMapsURL, options: [:], completionHandler: nil)
-        } else {
-            // Google Maps is not installed, show an action sheet to choose
-            let alert = UIAlertController(title: "Open Maps", message: "Choose a maps application", preferredStyle: .actionSheet)
-            
-            alert.addAction(UIAlertAction(title: "Google Maps (Browser)", style: .default) { _ in
-                UIApplication.shared.open(googleMapsFallbackURL, options: [:], completionHandler: nil)
-            })
-            
-            alert.addAction(UIAlertAction(title: "Apple Maps", style: .default) { _ in
-                UIApplication.shared.open(appleMapsURL, options: [:], completionHandler: nil)
-            })
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            
-            // You need to present this alert from a view controller
-            // For example:
-            if let topViewController = UIApplication.shared.windows.first?.rootViewController {
-                topViewController.present(alert, animated: true, completion: nil)
-            }
+        guard let apartment = apartment,
+              let locationUrl = URL(string: apartment.location) else {
+            return
         }
+        
+        UIApplication.shared.open(locationUrl, options: [:], completionHandler: nil)
     }
     
     private func setupCarouselView() {
@@ -231,6 +311,7 @@ extension ItemDetailsScreenVC : HowItWorksViewControllerDelegate{
         if(type == "HowItWorks") {
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "ApplyScreen") as! ApplyScreen
+            vc.apartment = self.apartment
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

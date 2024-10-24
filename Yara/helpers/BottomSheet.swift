@@ -30,6 +30,7 @@ class HowItWorksViewController: BasePopupViewController {
     @IBOutlet var learn_more_label: UILabel!
 
     var obj: Any?
+    var apartment:Apartment? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,14 +57,14 @@ class HowItWorksViewController: BasePopupViewController {
         applyNow.titleLabel?.font = CustomFont.semiBoldFont(size: 17)
         applyNow.setTitleColor(UIColor(hex: "#FFFFFF"), for: .normal)
         
-        onetime_button.setTitle("One time: $25k", for: .normal)
+        onetime_button.setTitle("One time: \(self.apartment?.oneTime ?? "$25k")", for: .normal)
         onetime_button.layer.cornerRadius = 33/2
         onetime_button.clipsToBounds = true
         onetime_button.titleLabel?.font = CustomFont.semiBoldFont(size: 13)
         onetime_button.setTitleColor(UIColor(hex: "#A9A9A9"), for: .normal)
         onetime_button.applyGradient(colors: [(UIColor(hex:"#040404") ?? .black).cgColor, (UIColor(hex:"#636363") ?? .gray).cgColor])
         
-        onetime_info.text = "and 1000$ per month"
+        onetime_info.text = "and \(self.apartment?.perMonth ?? "500$") per month"
         onetime_info.textColor = UIColor(hex: "#999999")
         onetime_info.font = CustomFont.semiBoldFont(size: 13)
         
