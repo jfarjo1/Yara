@@ -78,6 +78,7 @@ class HowItWorksViewController: BasePopupViewController {
         learnMore_button.backgroundColor = UIColor(hex: "#F9FAFB")
 
         _ = TapGestureRecognizer.addTapGesture(to: applyNow) {
+            TapticEngine.impact.feedback(.medium)
             self.dismiss(animated: true) {
                 if let delegate = self.delegate as? HowItWorksViewControllerDelegate {
                     delegate.onTapButtonPressed(type: "HowItWorks")

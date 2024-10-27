@@ -19,11 +19,8 @@ import NVActivityIndicatorView
 import OneSignalFramework
 import SwiftMessages
 import UIKit
-//import Segment
-//import TikTokBusinessSDK
 
 class CreateAccountViewController: UIViewController {
-    @IBOutlet var loadingIndicator: NVActivityIndicatorView!
     @IBOutlet var status: UILabel!
     @IBOutlet var simlyLogo: UIImageView!
     
@@ -39,14 +36,29 @@ class CreateAccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         status.text = "setting_up_ur_profile".localized
-        simlyLogo.isHidden = true
-        loadingIndicator.popIn()
-        
-        loadingIndicator.startAnimating()
-        
+        self.simlyLogo.isHidden = true
         createAccountLocal()
         
         status.font = CustomFont.semiBoldFont(size: 18)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.simlyLogo.popIn(duration: 2, completion: { _ in
+            self.startRotationAnimation()
+        })
+    }
+    
+    func startRotationAnimation() {
+        let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        rotationAnimation.fromValue = 0
+        rotationAnimation.toValue = CGFloat.pi * 2
+        rotationAnimation.duration = 20
+        rotationAnimation.repeatCount = .infinity
+        rotationAnimation.isRemovedOnCompletion = false
+        
+        self.simlyLogo.layer.add(rotationAnimation, forKey: "rotationAnimation")
     }
     
     //TODO: User Defaults
@@ -61,13 +73,10 @@ class CreateAccountViewController: UIViewController {
             switch result {
             case .success(_):
                 DispatchQueue.main.async {
-                    self.loadingIndicator.popOut()
-                    self.status.text = "welcome_to_simly".localized
+                    self.status.text = "Welcome to Yara"
                 }
                 DispatchQueue.main.async {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        self.simlyLogo.isHidden = false
-                        self.simlyLogo.popIn()
                         self.toMain(index: 0)
                     }
                 }
@@ -77,13 +86,10 @@ class CreateAccountViewController: UIViewController {
                     switch result {
                     case .success(_):
                         DispatchQueue.main.async {
-                            self.loadingIndicator.popOut()
-                            self.status.text = "welcome_to_simly".localized
+                            self.status.text = "Welcome to Yara"
                         }
                         DispatchQueue.main.async {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                self.simlyLogo.isHidden = false
-                                self.simlyLogo.popIn()
                                 self.toMain(index: 0)
                             }
                         }

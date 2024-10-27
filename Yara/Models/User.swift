@@ -15,6 +15,7 @@ struct User: Codable {
     var lastName: String?
     var isNotificationsEnabled: Bool
     var profileImageUrl: String?
+    var status: String?
     
     // MARK: - Computed Properties
     var fullName: String {
@@ -41,6 +42,7 @@ struct User: Codable {
         case lastName = "last_name"
         case isNotificationsEnabled = "is_notifications_enabled"
         case profileImageUrl = "profile_image_url"
+        case status
     }
     
     // MARK: - Initialization
@@ -54,7 +56,8 @@ struct User: Codable {
         firstName: String? = nil,
         lastName: String? = nil,
         isNotificationsEnabled: Bool = true,
-        profileImageUrl: String? = nil
+        profileImageUrl: String? = nil,
+        status: String? = nil
     ) {
         self.id = id
         self.uid = uid
@@ -66,6 +69,7 @@ struct User: Codable {
         self.lastName = lastName
         self.isNotificationsEnabled = isNotificationsEnabled
         self.profileImageUrl = profileImageUrl
+        self.status = status
     }
     
     // MARK: - Codable Implementation
@@ -82,6 +86,7 @@ struct User: Codable {
         self.lastName = try container.decodeIfPresent(String.self, forKey: .lastName)
         self.isNotificationsEnabled = try container.decode(Bool.self, forKey: .isNotificationsEnabled)
         self.profileImageUrl = try container.decodeIfPresent(String.self, forKey: .profileImageUrl)
+        self.status = try container.decodeIfPresent(String.self, forKey: .status)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -97,6 +102,7 @@ struct User: Codable {
         try container.encodeIfPresent(lastName, forKey: .lastName)
         try container.encode(isNotificationsEnabled, forKey: .isNotificationsEnabled)
         try container.encodeIfPresent(profileImageUrl, forKey: .profileImageUrl)
+        try container.encodeIfPresent(status, forKey: .status)
     }
 }
 
@@ -112,7 +118,8 @@ extension User {
             "first_name": firstName as Any,
             "last_name": lastName as Any,
             "is_notifications_enabled": isNotificationsEnabled,
-            "profile_image_url": profileImageUrl as Any
+            "profile_image_url": profileImageUrl as Any,
+            "status": status as Any
         ]
     }
     
@@ -131,7 +138,8 @@ extension User {
             firstName: dictionary["first_name"] as? String,
             lastName: dictionary["last_name"] as? String,
             isNotificationsEnabled: dictionary["is_notifications_enabled"] as? Bool ?? true,
-            profileImageUrl: dictionary["profile_image_url"] as? String
+            profileImageUrl: dictionary["profile_image_url"] as? String,
+            status: dictionary["status"] as? String
         )
     }
 }
@@ -351,6 +359,35 @@ class UserService {
         }
     }
     
+    func checkUserApplication(completion: @escaping (Result<Bool, Error>) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            completion(.failure(AuthError.noAuthUser))
+            return
+        }
+        
+        let applicationsRef = db.collection("applications")
+        
+        // Query applications where userID matches current user
+        applicationsRef
+            .whereField("userID", isEqualTo: uid)
+            .limit(to: 1)  // We only need to know if at least one exists
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                guard let snapshot = snapshot else {
+                    completion(.failure(AuthError.firestoreError))
+                    return
+                }
+                
+                // If documents array is not empty, user has an application
+                let hasApplication = !snapshot.documents.isEmpty
+                completion(.success(hasApplication))
+            }
+    }
+    
     // MARK: - User Data Methods
     
     // Get user from both local and remote
@@ -431,4 +468,35 @@ class UserService {
             completion(.success(user))
         }
     }
+    
+    func updateUserStatus(
+           status: String,
+           completion: @escaping (Error?) -> Void
+       ) {
+           guard let uid = Auth.auth().currentUser?.uid else {
+               completion(AuthError.noAuthUser)
+               return
+           }
+           
+           let userRef = db.collection(usersCollection).document(uid)
+           
+           userRef.updateData([
+               "status": status
+           ]) { [weak self] error in
+               if let error = error {
+                   completion(error)
+                   return
+               }
+               
+               // Update local storage with new status
+               self?.fetchUser(uid: uid) { result in
+                   switch result {
+                   case .success(_):
+                       completion(nil)
+                   case .failure(let error):
+                       completion(error)
+                   }
+               }
+           }
+       }
 }

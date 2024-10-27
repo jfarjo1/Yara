@@ -52,6 +52,7 @@ class MabroukScreenVC: UIViewController {
     }
     
     @IBAction func viewProgressButtonTapped(_ sender: Any) {
+        TapticEngine.impact.feedback(.medium)
         self.toMain(index: 1)
     }
 }

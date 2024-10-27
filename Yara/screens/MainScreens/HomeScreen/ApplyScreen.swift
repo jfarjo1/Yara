@@ -20,10 +20,6 @@ class ApplyScreen: UIViewController {
     @IBOutlet weak var emiratesIDBackTextField: UITextField!
     @IBOutlet weak var sixMonthBankSatementTextField: UITextField!
     
-    @IBOutlet weak var uploadEmiratesIDFrontButton: UIButton!
-    @IBOutlet weak var uploadEmiratesIDBackButton: UIButton!
-    @IBOutlet weak var uploadSixMonthBankStatementButton: UIButton!
-    
     @IBOutlet weak var applyButton: UIButton!
     
     @IBOutlet weak var learnMoreButton: UIButton!
@@ -118,9 +114,7 @@ class ApplyScreen: UIViewController {
         learnMoreButton.backgroundColor = UIColor(hex: "#F9FAFB")
         
         _ = TapGestureRecognizer.addTapGesture(to: applyButton) {
-            if(self.checkIfFieldsAreFilled()) {
-                // Form submission is now handled in checkIfFieldsAreFilled()
-            }
+            self.checkIfFieldsAreFilled()
         }
         
         _ = TapGestureRecognizer.addTapGesture(to: learnMoreButton) {
@@ -225,7 +219,7 @@ class ApplyScreen: UIViewController {
             "emiratesIDFrontURL": emiratesIDFrontURL,
             "emiratesIDBackURL": emiratesIDBackURL,
             "bankStatementURL": bankStatementURL,
-            "status": "pending",
+            "status": "1",
             "createdAt": FieldValue.serverTimestamp(),
             "updatedAt": FieldValue.serverTimestamp(),
             "apartmentId": apartment?.id ?? ""

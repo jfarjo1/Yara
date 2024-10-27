@@ -118,6 +118,13 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="QB8-Xf-n65" secondAttribute="trailing" constant="40" id="uSd-uR-QC4"/>
                 <constraint firstItem="QB8-Xf-n65" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="w2W-YT-eS7"/>
             </constraints>
+            <connections>
+                <outlet property="backgroundView" destination="QB8-Xf-n65" id="9t4-nv-MYx"/>
+                <outlet property="bodyLabel" destination="faW-BA-OZV" id="CtR-WI-KLd"/>
+                <outlet property="button" destination="gFS-vq-DuW" id="k7J-Xb-UQJ"/>
+                <outlet property="cancelButton" destination="KJk-rd-vP6" id="MSl-I8-8va"/>
+                <outlet property="titleLabel" destination="Uxe-EB-7of" id="a1I-EB-xUU"/>
+            </connections>
             <point key="canvasLocation" x="89" y="-12"/>
         </view>
     </objects>

@@ -21,6 +21,28 @@ class ImageCarouselView: UIView {
         let pageControl = UIPageControl()
         pageControl.currentPageIndicatorTintColor = UIColor(hex: "#D9D9D9")
         pageControl.pageIndicatorTintColor = UIColor(hex: "#D9D9D9")?.withAlphaComponent(0.2)
+        
+        if #available(iOS 14.0, *) {
+            let dotSize = CGSize(width: 6, height: 6)
+            let spacing: CGFloat = 0 // Adjust this value to control spacing
+            
+            // Create dot images with built-in spacing
+            let normalDot = UIImage.circularImage(
+                size: CGSize(width: dotSize.width + spacing, height: dotSize.height),
+                dotSize: dotSize,
+                color: UIColor(hex: "#D9D9D9")?.withAlphaComponent(0.8) ?? .gray
+            )
+            
+            let selectedDot = UIImage.circularImage(
+                size: CGSize(width: dotSize.width + spacing, height: dotSize.height),
+                dotSize: dotSize,
+                color: UIColor(hex: "#D9D9D9") ?? .white
+            )
+            
+            pageControl.preferredIndicatorImage = normalDot
+            pageControl.preferredCurrentPageIndicatorImage = selectedDot
+        }
+        
         return pageControl
     }()
     
@@ -162,6 +184,20 @@ extension ImageCarouselView: UIScrollViewDelegate {
         // Force horizontal-only scrolling
         if scrollView.contentOffset.y != 0 {
             scrollView.contentOffset.y = 0
+        }
+    }
+}
+
+extension UIImage {
+    static func circularImage(size: CGSize, dotSize: CGSize, color: UIColor) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { context in
+            color.setFill()
+            context.cgContext.setFillColor(color.cgColor)
+            context.cgContext.setStrokeColor(UIColor.clear.cgColor)
+            let rect = CGRect(x: 0, y: 0, width: dotSize.width, height: dotSize.height)
+            context.cgContext.addEllipse(in: rect)
+            context.cgContext.drawPath(using: .fill)
         }
     }
 }

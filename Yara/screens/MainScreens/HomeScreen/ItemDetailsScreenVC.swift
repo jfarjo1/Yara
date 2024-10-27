@@ -33,10 +33,18 @@ class ItemDetailsScreenVC: UIViewController {
     private let initialTextViewHeight: CGFloat = 91
     
     var apartment:Apartment? = nil
+    var hasApplication = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        UserService().checkUserApplication { result in
+            switch result {
+            case .success(var hasApplication):
+                self.hasApplication = hasApplication ? 1 : 0
+            case .failure(let error):
+                self.hasApplication = -1
+            }
+        }
         setupUI()
         if let apartment = apartment {
             updateUIWithApartment(apartment)
@@ -66,7 +74,6 @@ class ItemDetailsScreenVC: UIViewController {
         location_Btn.setTitle("Tap to view", for: .normal)
         location_Btn.titleLabel?.font = CustomFont.semiBoldFont(size: 14)
         
-        // Process and load images
         let processedImageUrls = apartment.imageUrls.flatMap { urlString in
             urlString.split(separator: " ").map(String.init)
         }
@@ -74,13 +81,10 @@ class ItemDetailsScreenVC: UIViewController {
         loadImages(from: processedImageUrls) { [weak self] images in
             guard let self = self else { return }
             if let carouselView = self.top_carousel.subviews.first as? ImageCarouselView {
-                // Safe string formatting for units left
-                let unitsLeftText = "\(apartment.unitsLeft) units left"
-                carouselView.configure(with: images, topLeftText: unitsLeftText)
+                carouselView.hideTopLeftLabel()
+                carouselView.configure(with: images, topLeftText: "")
             }
         }
-        
-        // Recalculate text view height for the new content
         calculateFullTextHeight()
     }
     
@@ -261,12 +265,24 @@ class ItemDetailsScreenVC: UIViewController {
     }
     
     @IBAction func buyNow(_ sender: Any) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "HowItWorksViewController") as! HowItWorksViewController
-        vc.apartment = self.apartment
-        vc.modalTransitionStyle = .coverVertical
-        vc.delegate = self
-        self.present(vc, animated: true)
+        if(hasApplication == 0) {
+            TapticEngine.impact.feedback(.medium)
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "HowItWorksViewController") as! HowItWorksViewController
+            vc.apartment = self.apartment
+            vc.modalTransitionStyle = .coverVertical
+            vc.delegate = self
+            self.present(vc, animated: true)
+        }else if hasApplication == 1 {
+            self.showAlert(title:"Can't Buy Now", message: "You already have a pending application.")
+        }
+        
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
     
     @IBAction func locationButtonPressed(_ sender: Any) {
