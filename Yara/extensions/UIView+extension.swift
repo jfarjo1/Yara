@@ -79,6 +79,25 @@ extension UIView {
 
     }
     
+    func addLightShadow(
+            color: UIColor = .black,
+            opacity: Float = 0.03,
+            offset: CGSize = CGSize(width: 0, height: 2),
+            radius: CGFloat = 4,
+            cornerRadius: CGFloat = 20
+        ) {
+            layer.masksToBounds = false
+            layer.shadowColor = color.cgColor
+            layer.shadowOpacity = opacity
+            layer.shadowOffset = offset
+            layer.shadowRadius = radius
+            layer.cornerRadius = cornerRadius
+            
+            // Optimize shadow rendering
+            layer.shouldRasterize = true
+            layer.rasterizationScale = UIScreen.main.scale
+        }
+    
     func imageWithView() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0.0)
         defer { UIGraphicsEndImageContext() }
@@ -160,34 +179,30 @@ extension UIViewController {
     }
     
     func toWelcome() {
-//        guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else {
-//            return
-//        }
-//        let story = UIStoryboard(name: "Main", bundle:nil)
-//        let vc = story.instantiateViewController(withIdentifier: "WelcomeNav")
-//        window.rootViewController = vc
-//
-//        let options: UIView.AnimationOptions = .transitionCrossDissolve
-//
-//        let duration: TimeInterval = 0.3
-//
-//        UIView.transition(with: window, duration: duration, options: options, animations: {}, completion:
-//        { completed in})
+        guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else {
+            return
+        }
+        let story = UIStoryboard(name: "Main", bundle:nil)
+        let vc = story.instantiateViewController(withIdentifier: "WelcomeNav")
+        window.rootViewController = vc
+
+        let options: UIView.AnimationOptions = .transitionCrossDissolve
+
+        let duration: TimeInterval = 0.3
+
+        UIView.transition(with: window, duration: duration, options: options, animations: {}, completion:
+        { completed in})
     }
     
 
     // Make sure from which uiviewcontroller it is called must have segue toWelcome
     func userLoggedOut() {
-//        let languageCode = LanguageManager.shared.currentLanguage()
-//        let domain = Bundle.main.bundleIdentifier!
-//        UserDefaults.standard.removePersistentDomain(forName: domain)
-//        UserDefaults.standard.synchronize() // this method is automatically invoked at periodic intervals, use this method only if you cannot wait for the automatic synchronization
-//        LocalizationSystem.sharedInstance.setLanguage(languageCode: languageCode)
-//        print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
-//        
-//        Utils.removeUser()
-//        
-//        self.toWelcome()
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        
+        LocalStorageManager().removeLocalUser()
+        
+        self.toWelcome()
     }
 }
 

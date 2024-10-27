@@ -13,19 +13,19 @@ import UIKit
 class Utils {
     let shared = Utils()
     
-    static func getUser() -> User?{
-        let key = "CURRENT_USER"
-        if let retrievedCodableObject = UserDefaults.standard.codableObject(dataType: User.self, key: key) {
-            return retrievedCodableObject
-        } else {
-            return nil
-        }
-    }
-    
-    static func saveUser(user: User) {
-        let key = "CURRENT_USER"
-        UserDefaults.standard.setCodableObject(user, forKey: key)
-    }
+//    static func getUser() -> User?{
+//        let key = "CURRENT_USER"
+//        if let retrievedCodableObject = UserDefaults.standard.codableObject(dataType: User.self, key: key) {
+//            return retrievedCodableObject
+//        } else {
+//            return nil
+//        }
+//    }
+//    
+//    static func saveUser(user: User) {
+//        let key = "CURRENT_USER"
+//        UserDefaults.standard.setCodableObject(user, forKey: key)
+//    }
     
     static func setIsLaunchedBefore(val:Bool) {
         UserDefaults.standard.set(val, forKey: "IS_FIRST_LAUNCH")

@@ -1,5 +1,5 @@
 {
-  "originHash" : "13afb122e46f7e678e4f64d613fe9749dd00458467443d64bb597755282de974",
+  "originHash" : "99d455bd6df6142ff9ad8a59a858ee2a400951f0a04b66797e74f842194c6881",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -152,6 +152,15 @@
       "state" : {
         "revision" : "c544df6ce316422b9d65a571f932e800213dd09c",
         "version" : "10.0.1"
+      }
+    },
+    {
+      "identity" : "viewanimator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/marcosgriselli/ViewAnimator.git",
+      "state" : {
+        "revision" : "55f1c46241b181c3e0b68d70edb6d87926c7d183",
+        "version" : "3.1.0"
       }
     }
   ],

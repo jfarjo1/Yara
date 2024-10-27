@@ -282,13 +282,13 @@ class EnterPassword: UIViewController, UITextFieldDelegate {
             
         } else {
             
-            let credentials = EmailAuthProvider.credential(withEmail: Utils.getUser()?.email ?? "", password: password)
+            let credentials = EmailAuthProvider.credential(withEmail: try! LocalStorageManager().getLocalUser()?.email ?? "", password: password)
             Auth.auth().currentUser?.reauthenticate(with: credentials) { result,error  in
                 if error == nil {
                     DispatchQueue.main.async {
                         let sb = UIStoryboard(name: "Main", bundle: nil)
                         let vc = sb.instantiateViewController(withIdentifier: "EnterPassword") as! EnterPassword
-                        vc.userEmail = Utils.getUser()?.email ?? ""
+                        vc.userEmail = try! LocalStorageManager().getLocalUser()?.email ?? ""
                         self.navigationController?.fadeTo(vc)
                     }
                 } else {
@@ -338,11 +338,11 @@ class EnterPassword: UIViewController, UITextFieldDelegate {
                 SwiftMessages.show(config: warningConfig, view: warning)
             }
         } else {
-            let credentials = EmailAuthProvider.credential(withEmail: Utils.getUser()?.email ?? "", password: password)
+            let credentials = EmailAuthProvider.credential(withEmail: try! LocalStorageManager().getLocalUser()?.email ?? "", password: password)
             Auth.auth().currentUser?.reauthenticate(with: credentials) { result,error  in
                 if error == nil {
                     DispatchQueue.main.async {
-                        let sb = UIStoryboard(name: "Signin", bundle: nil)
+                        let sb = UIStoryboard(name: "Main", bundle: nil)
                         let vc = sb.instantiateViewController(withIdentifier: "EnterEmail") as! EnterEmail
                         vc.password = password
                         vc.isEditEmail = true

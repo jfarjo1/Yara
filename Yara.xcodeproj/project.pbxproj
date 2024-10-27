@@ -14,6 +14,7 @@
 		130ED3502CBF1137006E70B6 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 130ED34F2CBF1137006E70B6 /* NVActivityIndicatorView */; };
 		130ED3522CBF1137006E70B6 /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = 130ED3512CBF1137006E70B6 /* NVActivityIndicatorViewExtended */; };
 		133279112CBDACF400422A42 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 133279102CBDACF400422A42 /* SwiftMessages */; };
+		13CE72E22CCD1BBE00348B2B /* ViewAnimator in Frameworks */ = {isa = PBXBuildFile; productRef = 13CE72E12CCD1BBE00348B2B /* ViewAnimator */; };
 		13D0AAEC2CBA7CDD001F458E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 13D0AAEB2CBA7CDD001F458E /* FirebaseAnalytics */; };
 		13D0AAEE2CBA7CDD001F458E /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 13D0AAED2CBA7CDD001F458E /* FirebaseAppCheck */; };
 		13D0AAF02CBA7CDD001F458E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 13D0AAEF2CBA7CDD001F458E /* FirebaseAuth */; };
@@ -72,6 +73,7 @@
 				13D0AAF02CBA7CDD001F458E /* FirebaseAuth in Frameworks */,
 				130ED3322CBF0122006E70B6 /* OneSignalExtension in Frameworks */,
 				13D0AAFA2CBA7CDD001F458E /* FirebaseFunctions in Frameworks */,
+				13CE72E22CCD1BBE00348B2B /* ViewAnimator in Frameworks */,
 				133279112CBDACF400422A42 /* SwiftMessages in Frameworks */,
 				13D0AAF42CBA7CDD001F458E /* FirebaseCrashlytics in Frameworks */,
 				13D0AAF22CBA7CDD001F458E /* FirebaseCore in Frameworks */,
@@ -138,6 +140,7 @@
 				130ED3382CBF0254006E70B6 /* Lottie */,
 				130ED34F2CBF1137006E70B6 /* NVActivityIndicatorView */,
 				130ED3512CBF1137006E70B6 /* NVActivityIndicatorViewExtended */,
+				13CE72E12CCD1BBE00348B2B /* ViewAnimator */,
 			);
 			productName = Yara;
 			productReference = 13D0AACD2CBA778F001F458E /* Yara.app */;
@@ -173,6 +176,7 @@
 				130ED3302CBF0122006E70B6 /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
 				130ED3372CBF0254006E70B6 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				130ED34E2CBF1137006E70B6 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
+				13CE72E02CCD1BBE00348B2B /* XCRemoteSwiftPackageReference "ViewAnimator" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 13D0AACE2CBA778F001F458E /* Products */;
@@ -436,6 +440,14 @@
 				minimumVersion = 10.0.1;
 			};
 		};
+		13CE72E02CCD1BBE00348B2B /* XCRemoteSwiftPackageReference "ViewAnimator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marcosgriselli/ViewAnimator.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.0;
+			};
+		};
 		13D0AAEA2CBA7CDD001F458E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -481,6 +493,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1332790F2CBDACF400422A42 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
 			productName = SwiftMessages;
+		};
+		13CE72E12CCD1BBE00348B2B /* ViewAnimator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 13CE72E02CCD1BBE00348B2B /* XCRemoteSwiftPackageReference "ViewAnimator" */;
+			productName = ViewAnimator;
 		};
 		13D0AAEB2CBA7CDD001F458E /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
