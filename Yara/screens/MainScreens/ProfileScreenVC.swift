@@ -73,7 +73,7 @@ class ProfileScreenVC: UIViewController {
     }
     
     func setupFonts() {
-        profileLabel.font = CustomFont.extraBoldFont(size: 42)
+        profileLabel.font = CustomFont.boldFont(size: 22)
         accountLabel.font = CustomFont.semiBoldFont(size: 25)
         name.font = CustomFont.semiBoldFont(size: 23)
         lblEmail.font = CustomFont.semiBoldFont(size: 16)

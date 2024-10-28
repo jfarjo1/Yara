@@ -6,7 +6,7 @@ import FirebaseFirestore
 class ApplyScreen: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var back_button: UIView!
+    @IBOutlet weak var back_button: UIButton!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var dateOfBirthTextField: UITextField!
@@ -25,6 +25,8 @@ class ApplyScreen: UIViewController {
     @IBOutlet weak var learnMoreButton: UIButton!
     @IBOutlet weak var learnMoreLabel: UILabel!
     
+    @IBOutlet weak var whatsappView:UIView!
+    
     var apartment: Apartment? = nil
     
     // Properties to store upload URLs
@@ -33,19 +35,64 @@ class ApplyScreen: UIViewController {
     private var bankStatementURL: String?
     private var currentUploadType: UploadType = .front
     
+    private var emiratesIDFrontButton: UIButton?
+    private var emiratesIDBackButton: UIButton?
+    private var bankStatementButton: UIButton?
+    
     enum UploadType {
         case front
         case back
         case bankStatement
     }
     
+    private let datePicker = UIDatePicker()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupDatePicker()
+        setupNumberPads()
         addDoneButtonOnKeyboard()
     }
     
+    private func setupDatePicker() {
+        // Configure date picker
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.maximumDate = Date() // Don't allow future dates
+        
+        // Set date picker as input view for date of birth field
+        dateOfBirthTextField.inputView = datePicker
+        
+        // Add target to handle date changes
+        datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+    }
+    
+    private func setupNumberPads() {
+        // Set keyboard type for monthly salary
+        monthlySalaryTextField.keyboardType = .numberPad
+        
+        // Set keyboard type for phone number
+        phoneNumberTextField.keyboardType = .numberPad
+    }
+    
+    @objc private func dateChanged() {
+        // Format the date
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        dateOfBirthTextField.text = formatter.string(from: datePicker.date)
+    }
+    
     func setupUI() {
+        
+        TapGestureRecognizer.addTapGesture(to: whatsappView) {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(identifier: "BottomUpViewController") as! BottomUpViewController
+            vc.modalTransitionStyle = .coverVertical
+            
+            self.present(vc, animated: true)
+        }
+        
         self.back_button.setRounded()
         self.titleLabel.text = "Apply Now"
         self.titleLabel.font = CustomFont.boldFont(size: 22)
@@ -113,12 +160,19 @@ class ApplyScreen: UIViewController {
         learnMoreButton.titleLabel?.font = CustomFont.semiBoldFont(size: 10)
         learnMoreButton.backgroundColor = UIColor(hex: "#F9FAFB")
         
+        self.dateOfBirthTextField.setConfigForApply()
+        self.dateOfBirthTextField.placeholder = "Date of Birth (DD/MM/YYYY)"
+        self.dateOfBirthTextField.font = CustomFont.semiBoldFont(size: 14)
+        
         _ = TapGestureRecognizer.addTapGesture(to: applyButton) {
             self.checkIfFieldsAreFilled()
         }
         
         _ = TapGestureRecognizer.addTapGesture(to: learnMoreButton) {
-            self.dismiss(animated: true)
+        }
+        
+        _ = TapGestureRecognizer.addTapGesture(to: back_button) {
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -131,6 +185,18 @@ class ApplyScreen: UIViewController {
         uploadButton.setTitleColor(.black, for: .normal)
         uploadButton.frame = CGRect(x: padding, y: 0, width: buttonWidth, height: containerView.frame.height)
         uploadButton.tag = tag
+        
+        // Store reference to the button
+        switch tag {
+        case 1:
+            emiratesIDFrontButton = uploadButton
+        case 2:
+            emiratesIDBackButton = uploadButton
+        case 3:
+            bankStatementButton = uploadButton
+        default:
+            break
+        }
         
         _ = TapGestureRecognizer.addTapGesture(to: uploadButton) {
             self.currentUploadType = tag == 1 ? .front : (tag == 2 ? .back : .bankStatement)
@@ -154,8 +220,7 @@ class ApplyScreen: UIViewController {
               let address = addressTextField.text, !address.isEmpty,
               let monthlySalaryText = monthlySalaryTextField.text, !monthlySalaryText.isEmpty,
               let nationality = nationalityTextField.text, !nationality.isEmpty,
-              let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty,
-              let emiratesIDFrontURL = self.emiratesIDFrontURL else {
+              let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty else {
             
             showAlert(title: "Missing Information", message: "Please fill in all required fields and upload Emirates ID front")
             return false
@@ -177,7 +242,7 @@ class ApplyScreen: UIViewController {
             monthlySalary: monthlySalary,
             nationality: nationality,
             phoneNumber: phoneNumber,
-            emiratesIDFrontURL: emiratesIDFrontURL,
+            emiratesIDFrontURL: emiratesIDFrontURL ?? "",
             emiratesIDBackURL: emiratesIDBackURL ?? "",
             bankStatementURL: bankStatementURL ?? ""
         )
@@ -327,20 +392,23 @@ extension ApplyScreen: UIImagePickerControllerDelegate, UINavigationControllerDe
                     
                     guard let downloadURL = url else { return }
                     
-                    // Store the URL based on upload type
+                    // Store the URL and update UI based on upload type
                     switch self.currentUploadType {
                     case .front:
                         self.emiratesIDFrontURL = downloadURL.absoluteString
-                        self.emiratesIDFrontTextField.text = "Uploaded"
-                        self.emiratesIDFrontTextField.textColor = .green
+                        self.emiratesIDFrontButton?.setTitle("Uploaded", for: .normal)
+                        self.emiratesIDFrontButton?.setTitleColor(.systemGreen, for: .normal)
+                        self.emiratesIDFrontButton?.isEnabled = false
                     case .back:
                         self.emiratesIDBackURL = downloadURL.absoluteString
-                        self.emiratesIDBackTextField.text = "Uploaded"
-                        self.emiratesIDBackTextField.textColor = .green
+                        self.emiratesIDBackButton?.setTitle("Uploaded", for: .normal)
+                        self.emiratesIDBackButton?.setTitleColor(.systemGreen, for: .normal)
+                        self.emiratesIDBackButton?.isEnabled = false
                     case .bankStatement:
                         self.bankStatementURL = downloadURL.absoluteString
-                        self.sixMonthBankSatementTextField.text = "Uploaded"
-                        self.sixMonthBankSatementTextField.textColor = .green
+                        self.bankStatementButton?.setTitle("Uploaded", for: .normal)
+                        self.bankStatementButton?.setTitleColor(.systemGreen, for: .normal)
+                        self.bankStatementButton?.isEnabled = false
                     }
                 }
             }
@@ -362,6 +430,7 @@ extension ApplyScreen {
         doneToolbar.items = [flexSpace, done]
         doneToolbar.sizeToFit()
         
+        // Add toolbar to all text fields
         firstNameTextField.inputAccessoryView = doneToolbar
         lastNameTextField.inputAccessoryView = doneToolbar
         dateOfBirthTextField.inputAccessoryView = doneToolbar

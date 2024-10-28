@@ -48,6 +48,8 @@ class MyHomeVC: UIViewController {
     @IBOutlet weak var learnMoreLabel: UILabel!
     @IBOutlet weak var learnMoreButton: UIButton!
     
+    @IBOutlet weak var whatsappView: UIView!
+    
     // MARK: - Properties
     private var progressBarView: ProgressBarView!
     
@@ -105,6 +107,14 @@ class MyHomeVC: UIViewController {
     private func setupUI() {
         setupMainContent()
         setupProgressView()
+        
+        TapGestureRecognizer.addTapGesture(to: whatsappView) {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(identifier: "BottomUpViewController") as! BottomUpViewController
+//            vc.modalTransitionStyle = .coverVertical
+            
+            self.present(vc, animated: true)
+        }
     }
     
     private func setupMainContent() {

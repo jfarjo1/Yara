@@ -54,7 +54,8 @@ class ItemDetailsScreenVC: UIViewController {
     private func updateUIWithApartment(_ apartment: Apartment) {
         // Update all content with actual data
         title_label.text = apartment.name
-        
+        title_label.font = CustomFont.semiBoldFont(size: 20)
+        title_label.textColor = UIColor(hex: "#0A0908")
         // Price button text with safe formatting
         price_btn.setTitle("One time: \(apartment.oneTime)", for: .normal)
         
@@ -82,7 +83,7 @@ class ItemDetailsScreenVC: UIViewController {
             guard let self = self else { return }
             if let carouselView = self.top_carousel.subviews.first as? ImageCarouselView {
                 carouselView.hideTopLeftLabel()
-                carouselView.configure(with: images, topLeftText: "")
+                carouselView.configure(with: images, topLeftText: nil)
             }
         }
         calculateFullTextHeight()
@@ -102,11 +103,12 @@ class ItemDetailsScreenVC: UIViewController {
         let carouselView: ImageCarouselView
         if let existingCarouselView = containerView.subviews.first as? ImageCarouselView {
             carouselView = existingCarouselView
+            carouselView.hideTopLeftLabel()
         } else {
             carouselView = ImageCarouselView()
             carouselView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(carouselView)
-            
+            carouselView.hideTopLeftLabel()
             NSLayoutConstraint.activate([
                 carouselView.topAnchor.constraint(equalTo: containerView.topAnchor),
                 carouselView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
@@ -299,12 +301,13 @@ class ItemDetailsScreenVC: UIViewController {
             print("Error: Could not find view with tag 2")
             return
         }
-        
         let carouselView: ImageCarouselView
         if let existingCarouselView = containerView.subviews.first as? ImageCarouselView {
             carouselView = existingCarouselView
+            carouselView.hideTopLeftLabel()
         } else {
             carouselView = ImageCarouselView()
+            carouselView.hideTopLeftLabel()
             carouselView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(carouselView)
             

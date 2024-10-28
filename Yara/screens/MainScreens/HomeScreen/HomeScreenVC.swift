@@ -4,6 +4,8 @@ import FirebaseFirestore
 class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var whatsappView:UIView!
+    
     private var apartments: [Apartment] = []
     private let db = Firestore.firestore()
     private var imageTasks: [URLSessionDataTask] = []
@@ -22,6 +24,14 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         setupTableView()
         fetchApartments()
+        
+        TapGestureRecognizer.addTapGesture(to: whatsappView) {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(identifier: "BottomUpViewController") as! BottomUpViewController
+            vc.modalTransitionStyle = .coverVertical
+            
+            self.present(vc, animated: true)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {

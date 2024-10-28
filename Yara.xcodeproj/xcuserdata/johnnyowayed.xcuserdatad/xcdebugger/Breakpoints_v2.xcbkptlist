@@ -183,32 +183,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FFE91E73-F88A-4D9C-A54A-02A3325B6937"
+            uuid = "B1FDAF81-9278-4A8E-AB0A-919DDAA60049"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Yara/screens/MainScreens/ProfileScreenVC.swift"
+            filePath = "Yara/screens/MainScreens/HomeScreen/ItemDetailsScreenVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "signout()"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "setupCarouselWithApartmentImages(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "611F058E-124D-4753-A33C-5314B54F9524"
+            uuid = "C22F35DC-881D-4420-9E75-91F4888A7F89"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Yara/screens/MainScreens/ProfileScreenVC.swift"
+            filePath = "Yara/screens/MainScreens/HomeScreen/ItemDetailsScreenVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "signout()"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "setupCarouselWithApartmentImages(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

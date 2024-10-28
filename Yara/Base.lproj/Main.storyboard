@@ -1517,14 +1517,40 @@ Let's find you a new one! Reset it</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGz-nI-Hx4">
+                                <rect key="frame" x="338" y="68" width="40" height="40"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="omh-kV-431">
+                                        <rect key="frame" x="11" y="11" width="18" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="18" id="D0e-YF-IEx"/>
+                                            <constraint firstAttribute="height" constant="18" id="xtP-4e-S7v"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="59P-Yz-aNj"/>
+                                    <constraint firstItem="omh-kV-431" firstAttribute="centerY" secondItem="iGz-nI-Hx4" secondAttribute="centerY" id="Tgv-p5-rUg"/>
+                                    <constraint firstAttribute="height" constant="40" id="X2x-nH-UID"/>
+                                    <constraint firstItem="omh-kV-431" firstAttribute="centerX" secondItem="iGz-nI-Hx4" secondAttribute="centerX" id="zsZ-6l-wmn"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lRa-Gn-4fB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="jVS-yv-xfW" firstAttribute="leading" secondItem="zdD-lw-99f" secondAttribute="leading" id="096-kD-8jw"/>
                             <constraint firstItem="lRa-Gn-4fB" firstAttribute="trailing" secondItem="jVS-yv-xfW" secondAttribute="trailing" id="87f-Y0-s9j"/>
+                            <constraint firstItem="lRa-Gn-4fB" firstAttribute="trailing" secondItem="iGz-nI-Hx4" secondAttribute="trailing" constant="24" id="K7Q-pn-gRg"/>
                             <constraint firstItem="lRa-Gn-4fB" firstAttribute="bottom" secondItem="jVS-yv-xfW" secondAttribute="bottom" id="QeJ-LH-czC"/>
                             <constraint firstItem="QdH-g3-vCz" firstAttribute="top" secondItem="zdD-lw-99f" secondAttribute="top" constant="67" id="dda-ef-6FX"/>
+                            <constraint firstItem="iGz-nI-Hx4" firstAttribute="centerY" secondItem="QdH-g3-vCz" secondAttribute="centerY" id="mEr-J1-l3l"/>
                             <constraint firstItem="jVS-yv-xfW" firstAttribute="top" secondItem="lRa-Gn-4fB" secondAttribute="top" constant="20" id="nTB-1N-qNd"/>
                             <constraint firstItem="QdH-g3-vCz" firstAttribute="leading" secondItem="lRa-Gn-4fB" secondAttribute="leading" constant="36" id="xue-Rp-Tzk"/>
                         </constraints>
@@ -1563,6 +1589,7 @@ Let's find you a new one! Reset it</string>
                         <outlet property="progres_two_title" destination="46j-lw-NDg" id="w0f-UZ-otH"/>
                         <outlet property="progres_two_view" destination="5fs-Rp-54g" id="ehT-kb-e1e"/>
                         <outlet property="steps_label" destination="e1L-go-GsL" id="UuD-eD-gqI"/>
+                        <outlet property="whatsappView" destination="iGz-nI-Hx4" id="bCJ-FA-0b5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ndd-WK-CgX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1677,22 +1704,49 @@ Let's find you a new one! Reset it</string>
                                     <constraint firstAttribute="width" constant="93" id="o49-sj-UqF"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKO-xb-hij">
+                                <rect key="frame" x="338" y="51.666666666666657" width="40" height="40"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="8Iu-B1-SDH">
+                                        <rect key="frame" x="11" y="11" width="18" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="ERe-K2-XXM"/>
+                                            <constraint firstAttribute="width" constant="18" id="OY4-Hr-a9s"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="8Iu-B1-SDH" firstAttribute="centerY" secondItem="SKO-xb-hij" secondAttribute="centerY" id="Bfg-2u-KJD"/>
+                                    <constraint firstItem="8Iu-B1-SDH" firstAttribute="centerX" secondItem="SKO-xb-hij" secondAttribute="centerX" id="ODe-YN-zxM"/>
+                                    <constraint firstAttribute="width" constant="40" id="oex-QS-e3G"/>
+                                    <constraint firstAttribute="height" constant="40" id="ol6-4X-5Oj"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oFi-KK-PE6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="SKO-xb-hij" firstAttribute="centerY" secondItem="Bnj-g8-YNw" secondAttribute="centerY" id="2OQ-U5-t6X"/>
                             <constraint firstItem="VuD-e5-kjR" firstAttribute="bottom" secondItem="oFi-KK-PE6" secondAttribute="bottom" id="4XK-jc-xpF"/>
                             <constraint firstItem="Bnj-g8-YNw" firstAttribute="leading" secondItem="oFi-KK-PE6" secondAttribute="leading" constant="23" id="4u9-lb-Z6c"/>
                             <constraint firstItem="VuD-e5-kjR" firstAttribute="centerX" secondItem="hx3-OT-Ugm" secondAttribute="centerX" id="CMv-HD-e0D"/>
                             <constraint firstItem="Bnj-g8-YNw" firstAttribute="top" secondItem="hx3-OT-Ugm" secondAttribute="top" constant="60" id="Fhf-Vd-ePj"/>
                             <constraint firstItem="VuD-e5-kjR" firstAttribute="trailing" secondItem="oFi-KK-PE6" secondAttribute="trailing" id="HDj-9s-gH7"/>
                             <constraint firstItem="VuD-e5-kjR" firstAttribute="leading" secondItem="oFi-KK-PE6" secondAttribute="leading" id="T5n-8P-hgs"/>
+                            <constraint firstItem="oFi-KK-PE6" firstAttribute="trailing" secondItem="SKO-xb-hij" secondAttribute="trailing" constant="24" id="WOD-BJ-dJl"/>
                             <constraint firstItem="VuD-e5-kjR" firstAttribute="top" secondItem="Bnj-g8-YNw" secondAttribute="bottom" constant="16" id="utG-W2-X1P"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="13w-ZE-IRm"/>
                     <connections>
                         <outlet property="tableView" destination="VuD-e5-kjR" id="Ehy-cw-6eP"/>
+                        <outlet property="whatsappView" destination="SKO-xb-hij" id="pQm-Ae-F5D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5L-6E-R4v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2197,7 +2251,7 @@ Let's find you a new one! Reset it</string>
         <!--How It Works View Controller-->
         <scene sceneID="Aqd-DH-Uwj">
             <objects>
-                <viewController storyboardIdentifier="HowItWorksViewController" modalPresentationStyle="overFullScreen" id="ytK-q5-8W1" customClass="HowItWorksViewController" customModule="Yara" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HowItWorksViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="ytK-q5-8W1" customClass="HowItWorksViewController" customModule="Yara" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nCH-cb-VsN">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2412,7 +2466,7 @@ Let's find you a new one! Reset it</string>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUd-Fq-dvF">
-                                <rect key="frame" x="86" y="67.333333333333329" width="266" height="20.333333333333329"/>
+                                <rect key="frame" x="86" y="67.333333333333329" width="41.333333333333343" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -2581,15 +2635,40 @@ Let's find you a new one! Reset it</string>
                                     <constraint firstAttribute="bottom" secondItem="YVP-DH-Isu" secondAttribute="bottom" id="h4V-8g-2TW"/>
                                 </constraints>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZF-CT-0s2">
+                                <rect key="frame" x="338" y="57.666666666666657" width="40" height="40"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="neh-ri-wZ6">
+                                        <rect key="frame" x="11" y="11.000000000000007" width="18" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="18" id="DTF-Yi-chT"/>
+                                            <constraint firstAttribute="height" constant="18" id="TRb-H6-ryp"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="neh-ri-wZ6" firstAttribute="centerX" secondItem="YZF-CT-0s2" secondAttribute="centerX" id="1yg-5i-rjc"/>
+                                    <constraint firstItem="neh-ri-wZ6" firstAttribute="centerY" secondItem="YZF-CT-0s2" secondAttribute="centerY" id="32R-8h-ber"/>
+                                    <constraint firstAttribute="height" constant="40" id="SKx-Re-Uvc"/>
+                                    <constraint firstAttribute="width" constant="40" id="nvE-10-p1g"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mWU-Vp-RZB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="mWU-Vp-RZB" firstAttribute="trailing" secondItem="YZF-CT-0s2" secondAttribute="trailing" constant="24" id="74w-pm-FCp"/>
                             <constraint firstItem="aUd-Fq-dvF" firstAttribute="leading" secondItem="2lQ-zP-Y5u" secondAttribute="trailing" constant="16" id="G4z-vF-9ea"/>
                             <constraint firstAttribute="trailing" secondItem="TGe-MP-MVZ" secondAttribute="trailing" id="IKy-Fl-n2d"/>
                             <constraint firstAttribute="bottom" secondItem="TGe-MP-MVZ" secondAttribute="bottom" id="LKG-he-yYv"/>
                             <constraint firstItem="aUd-Fq-dvF" firstAttribute="centerY" secondItem="Ihd-Rd-gDU" secondAttribute="centerY" id="OMF-YL-uWD"/>
-                            <constraint firstItem="mWU-Vp-RZB" firstAttribute="trailing" secondItem="aUd-Fq-dvF" secondAttribute="trailing" constant="50" id="ZQE-df-UGT"/>
+                            <constraint firstItem="YZF-CT-0s2" firstAttribute="centerY" secondItem="aUd-Fq-dvF" secondAttribute="centerY" id="QfK-2w-dc9"/>
                             <constraint firstItem="TGe-MP-MVZ" firstAttribute="leading" secondItem="EGu-vU-TEF" secondAttribute="leading" id="bta-mc-i5F"/>
                             <constraint firstItem="2lQ-zP-Y5u" firstAttribute="top" secondItem="EGu-vU-TEF" secondAttribute="top" constant="60" id="imE-ft-IcR"/>
                             <constraint firstItem="TGe-MP-MVZ" firstAttribute="top" secondItem="2lQ-zP-Y5u" secondAttribute="bottom" id="jkz-TI-gbD"/>
@@ -2613,6 +2692,7 @@ Let's find you a new one! Reset it</string>
                         <outlet property="phoneNumberTextField" destination="bOm-Bd-6Bx" id="VBa-vX-Tep"/>
                         <outlet property="sixMonthBankSatementTextField" destination="lO9-Bw-WKC" id="Kj3-yx-ksI"/>
                         <outlet property="titleLabel" destination="aUd-Fq-dvF" id="oMz-Tn-Wod"/>
+                        <outlet property="whatsappView" destination="YZF-CT-0s2" id="vkE-oS-Ljt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nmb-Yr-SvO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2694,13 +2774,13 @@ Let's find you a new one! Reset it</string>
         <!--Modal Popup View Controller-->
         <scene sceneID="Wxa-Xs-sg6">
             <objects>
-                <viewController storyboardIdentifier="ModalPopupViewController" id="MlG-BF-q9c" customClass="ModalPopupViewController" customModule="Yara" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ModalPopupViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="MlG-BF-q9c" customClass="ModalPopupViewController" customModule="Yara" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NYD-3g-Wbh">
-                        <rect key="frame" x="0.0" y="0.0" width="402" height="864"/>
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XDO-E6-eox">
-                                <rect key="frame" x="14" y="604" width="374" height="235"/>
+                                <rect key="frame" x="14" y="614" width="374" height="235"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="rBQ-aq-Ykg">
                                         <rect key="frame" x="33" y="34" width="308" height="104"/>
@@ -2733,7 +2813,7 @@ Let's find you a new one! Reset it</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFh-n4-ZBC">
                                         <rect key="frame" x="313" y="22" width="35" height="35"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_cancel" translatesAutoresizingMaskIntoConstraints="NO" id="GWR-Yg-QYE">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancel 2" translatesAutoresizingMaskIntoConstraints="NO" id="GWR-Yg-QYE">
                                                 <rect key="frame" x="9" y="9" width="17" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="dBx-cu-uzK"/>
@@ -2880,10 +2960,10 @@ Let's find you a new one! Reset it</string>
                                 <rect key="frame" x="0.0" y="0.0" width="402" height="791"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QVc-5r-yvL">
-                                        <rect key="frame" x="0.0" y="10" width="402" height="776.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="10" width="402" height="767"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GgE-Zh-Qj2">
-                                                <rect key="frame" x="36" y="15" width="330" height="38"/>
+                                                <rect key="frame" x="36" y="0.0" width="330" height="38"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38" id="G6j-om-lIU"/>
                                                 </constraints>
@@ -2892,7 +2972,7 @@ Let's find you a new one! Reset it</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cv-4F-DEw">
-                                                <rect key="frame" x="36" y="83.333333333333329" width="330" height="30"/>
+                                                <rect key="frame" x="36" y="71.333333333333329" width="330" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="J2q-Le-4Fz"/>
                                                 </constraints>
@@ -2901,7 +2981,7 @@ Let's find you a new one! Reset it</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Vv-Wl-hwV">
-                                                <rect key="frame" x="36" y="126.66666666666666" width="330" height="80"/>
+                                                <rect key="frame" x="36" y="117" width="330" height="80"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGv-Ht-d5H">
                                                         <rect key="frame" x="0.0" y="0.0" width="330" height="80"/>
@@ -2919,16 +2999,16 @@ Let's find you a new one! Reset it</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Bt3-NF-eCQ">
-                                                                <rect key="frame" x="104" y="16.333333333333339" width="226" height="47.666666666666657"/>
+                                                                <rect key="frame" x="104" y="19.666666666666657" width="226" height="41"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading . . ." textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cXc-qA-jnG">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="121.66666666666667" height="27"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="121.66666666666667" height="23"/>
                                                                         <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="23"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading . . ." textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="GH2-Q9-cdl">
-                                                                        <rect key="frame" x="0.0" y="29" width="84.666666666666671" height="18.666666666666671"/>
+                                                                        <rect key="frame" x="0.0" y="25" width="84.666666666666671" height="16"/>
                                                                         <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="16"/>
                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -2952,7 +3032,7 @@ Let's find you a new one! Reset it</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDX-9V-HXz">
-                                                <rect key="frame" x="36" y="239.66666666666666" width="330" height="29.999999999999972"/>
+                                                <rect key="frame" x="36" y="230" width="330" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Puj-6N-6Er"/>
                                                 </constraints>
@@ -2961,7 +3041,7 @@ Let's find you a new one! Reset it</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ndS-Xo-z5W">
-                                                <rect key="frame" x="36" y="286.33333333333331" width="330" height="419.99999999999994"/>
+                                                <rect key="frame" x="36" y="277" width="330" height="420"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mfv-7W-I20">
                                                         <rect key="frame" x="0.0" y="0.0" width="330" height="50"/>
@@ -2998,7 +3078,7 @@ Let's find you a new one! Reset it</string>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Live chat" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="56R-9K-I5e">
-                                                                        <rect key="frame" x="70" y="11.333333333333371" width="216" height="27"/>
+                                                                        <rect key="frame" x="70" y="13.666666666666686" width="216" height="23"/>
                                                                         <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="23"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -3007,7 +3087,7 @@ Let's find you a new one! Reset it</string>
                                                                         <rect key="frame" x="306" y="13" width="24" height="24"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="Zt3-Mj-1An">
-                                                                                <rect key="frame" x="7.6666666666666856" y="7.3333333333333712" width="9" height="9"/>
+                                                                                <rect key="frame" x="7.6666666666666856" y="7.6666666666666856" width="9" height="9"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="9" id="5jD-if-WgN"/>
                                                                                     <constraint firstAttribute="height" constant="9" id="oz0-YL-XTR"/>
@@ -3062,7 +3142,7 @@ Let's find you a new one! Reset it</string>
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="question (3).png" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rE6-fj-gM8">
-                                                                                <rect key="frame" x="12.666666666666664" y="12.333333333333371" width="25" height="25"/>
+                                                                                <rect key="frame" x="12.666666666666664" y="12.666666666666686" width="25" height="25"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="25" id="NqN-3A-qJW"/>
                                                                                     <constraint firstAttribute="height" constant="25" id="hOQ-eP-p8k"/>
@@ -3084,7 +3164,7 @@ Let's find you a new one! Reset it</string>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="DbO-va-bRP">
-                                                                        <rect key="frame" x="70" y="11.333333333333371" width="216" height="27"/>
+                                                                        <rect key="frame" x="70" y="13.666666666666686" width="216" height="23"/>
                                                                         <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="23"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -3093,7 +3173,7 @@ Let's find you a new one! Reset it</string>
                                                                         <rect key="frame" x="306" y="13" width="24" height="24"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="CDr-p2-FdV">
-                                                                                <rect key="frame" x="7.6666666666666856" y="7.3333333333333712" width="9" height="9"/>
+                                                                                <rect key="frame" x="7.6666666666666856" y="7.6666666666666856" width="9" height="9"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="9" id="NvA-1B-PYc"/>
                                                                                     <constraint firstAttribute="width" constant="9" id="SMJ-Ny-aUk"/>
@@ -3148,7 +3228,7 @@ Let's find you a new one! Reset it</string>
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="padlock (1).png" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y5l-NA-RPr">
-                                                                                <rect key="frame" x="13.666666666666664" y="13.333333333333371" width="23" height="23"/>
+                                                                                <rect key="frame" x="13.666666666666664" y="13.666666666666686" width="23" height="23"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="23" id="gIq-yJ-DF1"/>
                                                                                     <constraint firstAttribute="height" constant="23" id="xSv-QL-mqu"/>
@@ -3170,7 +3250,7 @@ Let's find you a new one! Reset it</string>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bRx-1n-CcZ">
-                                                                        <rect key="frame" x="70" y="11.333333333333371" width="216" height="27"/>
+                                                                        <rect key="frame" x="70" y="13.666666666666686" width="216" height="23"/>
                                                                         <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="23"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -3179,7 +3259,7 @@ Let's find you a new one! Reset it</string>
                                                                         <rect key="frame" x="306" y="13" width="24" height="24"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="mee-rh-E5s">
-                                                                                <rect key="frame" x="7.6666666666666856" y="7.3333333333333712" width="9" height="9"/>
+                                                                                <rect key="frame" x="7.6666666666666856" y="7.6666666666666856" width="9" height="9"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="9" id="Mhj-md-9q0"/>
                                                                                     <constraint firstAttribute="height" constant="9" id="OSk-h7-waf"/>
@@ -3221,7 +3301,7 @@ Let's find you a new one! Reset it</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="whl-xF-aqU">
-                                                        <rect key="frame" x="0.0" y="222.00000000000006" width="330" height="50"/>
+                                                        <rect key="frame" x="0.0" y="222" width="330" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBn-Sj-ysc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="330" height="50"/>
@@ -3264,7 +3344,7 @@ Let's find you a new one! Reset it</string>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xdH-he-L0B">
-                                                                        <rect key="frame" x="70" y="11.333333333333258" width="216" height="27"/>
+                                                                        <rect key="frame" x="70" y="13.666666666666629" width="216" height="23"/>
                                                                         <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="23"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -3273,7 +3353,7 @@ Let's find you a new one! Reset it</string>
                                                                         <rect key="frame" x="306" y="13" width="24" height="24"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="c3s-J5-0Lb">
-                                                                                <rect key="frame" x="7.6666666666666856" y="7.3333333333332575" width="9" height="9"/>
+                                                                                <rect key="frame" x="7.6666666666666856" y="7.6666666666666288" width="9" height="9"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="9" id="0lH-rh-HMP"/>
                                                                                     <constraint firstAttribute="height" constant="9" id="wgv-4S-gUJ"/>
@@ -3311,7 +3391,7 @@ Let's find you a new one! Reset it</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INY-ku-gsz">
-                                                        <rect key="frame" x="0.0" y="296.00000000000006" width="330" height="50"/>
+                                                        <rect key="frame" x="0.0" y="296" width="330" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRk-F4-Xb0">
                                                                 <rect key="frame" x="0.0" y="0.0" width="330" height="50"/>
@@ -3350,7 +3430,7 @@ Let's find you a new one! Reset it</string>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="e3J-NK-spU">
-                                                                        <rect key="frame" x="70" y="11.333333333333258" width="216" height="27"/>
+                                                                        <rect key="frame" x="70" y="13.666666666666629" width="216" height="23"/>
                                                                         <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="23"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -3359,7 +3439,7 @@ Let's find you a new one! Reset it</string>
                                                                         <rect key="frame" x="306" y="13" width="24" height="24"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="bMs-QX-Mor">
-                                                                                <rect key="frame" x="7.6666666666666856" y="7.3333333333332575" width="9" height="9"/>
+                                                                                <rect key="frame" x="7.6666666666666856" y="7.6666666666666288" width="9" height="9"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="9" id="7Ws-Po-LvO"/>
                                                                                     <constraint firstAttribute="height" constant="9" id="Rcx-X8-JuZ"/>
@@ -3397,7 +3477,7 @@ Let's find you a new one! Reset it</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAT-RV-hWv">
-                                                        <rect key="frame" x="0.0" y="370.00000000000006" width="330" height="50"/>
+                                                        <rect key="frame" x="0.0" y="370" width="330" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T9l-vl-sEH">
                                                                 <rect key="frame" x="0.0" y="0.0" width="330" height="50"/>
@@ -3436,7 +3516,7 @@ Let's find you a new one! Reset it</string>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="M10-J3-rxl">
-                                                                        <rect key="frame" x="70" y="11.333333333333258" width="216" height="27"/>
+                                                                        <rect key="frame" x="70" y="13.666666666666629" width="216" height="23"/>
                                                                         <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="23"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -3445,7 +3525,7 @@ Let's find you a new one! Reset it</string>
                                                                         <rect key="frame" x="306" y="13" width="24" height="24"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="jWg-6W-QKu">
-                                                                                <rect key="frame" x="7.6666666666666856" y="7.3333333333332575" width="9" height="9"/>
+                                                                                <rect key="frame" x="7.6666666666666856" y="7.6666666666666288" width="9" height="9"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="9" id="3GR-2n-6sK"/>
                                                                                     <constraint firstAttribute="width" constant="9" id="gIR-H5-g8n"/>
@@ -3497,7 +3577,7 @@ Let's find you a new one! Reset it</string>
                                             <constraint firstItem="rDX-9V-HXz" firstAttribute="leading" secondItem="QVc-5r-yvL" secondAttribute="leading" constant="36" id="XWC-LB-Qw8"/>
                                             <constraint firstItem="ndS-Xo-z5W" firstAttribute="top" secondItem="rDX-9V-HXz" secondAttribute="bottom" multiplier="0.95" constant="30" id="XzJ-PB-Ofg"/>
                                             <constraint firstItem="ndS-Xo-z5W" firstAttribute="leading" secondItem="QVc-5r-yvL" secondAttribute="leading" constant="36" id="ahp-PO-4ie"/>
-                                            <constraint firstItem="GgE-Zh-Qj2" firstAttribute="top" secondItem="QVc-5r-yvL" secondAttribute="top" constant="15" id="hA9-zF-fvv"/>
+                                            <constraint firstItem="GgE-Zh-Qj2" firstAttribute="top" secondItem="QVc-5r-yvL" secondAttribute="top" id="hA9-zF-fvv"/>
                                             <constraint firstAttribute="trailing" secondItem="3cv-4F-DEw" secondAttribute="trailing" constant="36" id="hIM-ph-qwD"/>
                                             <constraint firstItem="3Vv-Wl-hwV" firstAttribute="top" secondItem="3cv-4F-DEw" secondAttribute="bottom" multiplier="0.8" constant="36" id="huh-Ce-NSW"/>
                                             <constraint firstAttribute="trailing" secondItem="rDX-9V-HXz" secondAttribute="trailing" constant="36" id="kRG-bZ-beA"/>
@@ -3547,7 +3627,7 @@ Let's find you a new one! Reset it</string>
         <!--Bottom Up View Controller-->
         <scene sceneID="zaG-5M-5bb">
             <objects>
-                <viewController storyboardIdentifier="BottomUpViewController" id="ywv-fc-S9V" customClass="BottomUpViewController" customModule="Yara" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BottomUpViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="ywv-fc-S9V" customClass="BottomUpViewController" customModule="Yara" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Aqb-f8-a24">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3686,8 +3766,8 @@ Let's find you a new one! Reset it</string>
         <image name="email" width="44" height="44"/>
         <image name="home" width="25" height="25"/>
         <image name="ic_arrow_right" width="9" height="9"/>
-        <image name="ic_cancel" width="17" height="17"/>
         <image name="ic_network_gray_big" width="35" height="35"/>
+        <image name="ic_whatsapp" width="18" height="18"/>
         <image name="live-chat (1).png" width="512" height="512"/>
         <image name="log-out.png" width="512" height="512"/>
         <image name="maximize 1" width="20" height="20"/>
