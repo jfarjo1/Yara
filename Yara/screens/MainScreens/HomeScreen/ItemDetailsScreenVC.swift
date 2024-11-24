@@ -26,11 +26,11 @@ class ItemDetailsScreenVC: UIViewController {
     @IBOutlet weak var close_btn_view: UIView!
     @IBOutlet weak var descriptionTextViewHeightConstraint: NSLayoutConstraint!
     
-    private let fullText = "This is a long text that will be truncated initially. It contains multiple lines and will show only the first four lines at the beginning. When the user taps 'Show More', it will expand to show the entire text content. This is useful for displaying long descriptions or articles in a compact way.\nThis is a long text that will be truncated initially. It contains multiple lines and will show only the first four lines at the beginning. When the user taps 'Show More', it will expand to show the entire text content. This is useful for displaying long descriptions or articles in a compact way."
+    private var fullText = ""
     private let maxLines = 4
     private var isExpanded = false
     private var fullTextHeight: CGFloat = 0
-    private let initialTextViewHeight: CGFloat = 91
+    private let initialTextViewHeight: CGFloat = 85
     
     var apartment:Apartment? = nil
     var hasApplication = -1
@@ -61,6 +61,8 @@ class ItemDetailsScreenVC: UIViewController {
         
         // Monthly price with safe formatting
         price_label.text = "and \(apartment.perMonth) monthly"
+        
+        fullText = apartment.description
         
         description_textView.text = apartment.description
         
@@ -166,7 +168,11 @@ class ItemDetailsScreenVC: UIViewController {
         price_btn.layer.cornerRadius = 33/2
         price_btn.titleLabel?.font = CustomFont.semiBoldFont(size: 13)
         price_btn.setTitleColor(UIColor(hex: "#A9A9A9"), for: .normal)
-        price_btn.applyGradient(colors: [(UIColor(hex:"#040404") ?? .black).cgColor, (UIColor(hex:"#636363") ?? .gray).cgColor])
+        price_btn.applyGradient(colors: [(UIColor(hex:"#040404") ?? .black).cgColor,
+                                         (UIColor(hex:"#343434") ?? .gray).cgColor,
+                                         (UIColor(hex:"#4B4B4B") ?? .black).cgColor,
+                                         (UIColor(hex:"#575757") ?? .gray).cgColor,
+                                         (UIColor(hex:"#636363") ?? .black).cgColor,])
         
         price_label.text = "and 1000$ per month"
         price_label.textColor = UIColor(hex: "#999999")
@@ -180,14 +186,15 @@ class ItemDetailsScreenVC: UIViewController {
         
         buy_now.layer.cornerRadius = 45/2
         buy_now.clipsToBounds = true
-        buy_now.setTitle("Buy Now", for: .normal)
+        buy_now.setTitle("Get Now", for: .normal)
         buy_now.backgroundColor = UIColor(hex: "#484848")
         buy_now.titleLabel?.font = CustomFont.semiBoldFont(size: 17)
         buy_now.setTitleColor(UIColor(hex: "#FFFFFF"), for: .normal)
         
         description_textView.text = fullText
+        description_textView.textContainerInset = .zero
+        description_textView.textContainer.lineFragmentPadding = 0
         description_textView.textContainer.maximumNumberOfLines = maxLines
-        description_textView.textContainer.lineBreakMode = .byTruncatingTail
         description_textView.isScrollEnabled = false
         description_textView.isUserInteractionEnabled = false
         description_textView.textColor = UIColor(hex: "#999999")
@@ -237,11 +244,6 @@ class ItemDetailsScreenVC: UIViewController {
         textView.layoutManager.enumerateLineFragments(forGlyphRange: NSRange(location: 0, length: textView.textStorage.length)) { (rect, usedRect, textContainer, glyphRange, stop) in
             self.fullTextHeight = rect.maxY
         }
-        
-        // Add a little extra padding
-        self.fullTextHeight += 20
-        
-        // Ensure the button is visible if there's more text
         show_full.isHidden = (self.fullTextHeight <= self.initialTextViewHeight)
     }
     
@@ -250,11 +252,11 @@ class ItemDetailsScreenVC: UIViewController {
         if isExpanded {
             descriptionTextViewHeightConstraint.constant = fullTextHeight
             description_textView.textContainer.maximumNumberOfLines = 0
-            show_full.setTitle("Show Less", for: .normal)
+            show_full.setTitle("Show less description", for: .normal)
         } else {
-            descriptionTextViewHeightConstraint.constant = 91 // Or your initial fixed height
+            descriptionTextViewHeightConstraint.constant = 85 // Or your initial fixed height
             description_textView.textContainer.maximumNumberOfLines = maxLines
-            show_full.setTitle("Show More", for: .normal)
+            show_full.setTitle("Show full description", for: .normal)
         }
         
         UIView.animate(withDuration: 0.3) {

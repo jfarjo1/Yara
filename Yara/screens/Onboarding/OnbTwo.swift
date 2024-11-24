@@ -17,7 +17,7 @@ class OnbTwo: UIViewController {
         super.viewDidLoad()
         
         self.label.numberOfLines = 3
-        self.label.setGradientTextColor(text: "Start owning for $25K and pay like you're renting", font: CustomFont.interMediumFont(size: 35), colors: [UIColor(hex: "#B0B5D5")!, UIColor(hex: "#B0B5D5")!])
+        self.label.setGradientTextColor(text: "We make owning a home in Dubai a seamless journey", font: CustomFont.interMediumFont(size: 35), colors: [UIColor(hex: "#B0B5D5")!, UIColor(hex: "#B0B5D5")!])
         
         self.imageView.layer.masksToBounds = true
         self.imageView.layer.cornerRadius = 30

@@ -142,9 +142,15 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             priceButton.layer.cornerRadius = 33/2
             priceButton.setTitleColor(UIColor(hex: "#A9A9A9"), for: .normal)
             priceButton.titleLabel?.font = CustomFont.semiBoldFont(size: 13)
+//            priceButton.setBackgroundImage(UIImage(named: "btn_gradient_bg"), for: .normal)
+//            priceButton.clipsToBounds = true
+            
             priceButton.applyGradient(colors: [
                 (UIColor(hex:"#040404") ?? .black).cgColor,
-                (UIColor(hex:"#636363") ?? .gray).cgColor
+                (UIColor(hex:"#343434") ?? .gray).cgColor,
+                (UIColor(hex:"#4B4B4B") ?? .black).cgColor,
+                (UIColor(hex:"#575757") ?? .gray).cgColor,
+                (UIColor(hex:"#636363") ?? .black).cgColor,
             ])
             
             _ = TapGestureRecognizer.addTapGesture(to: priceButton) { [weak self] in

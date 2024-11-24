@@ -29,7 +29,7 @@ class MabroukScreenVC: UIViewController {
         self.mainLabel.setGradientTextColor(text: "Mabrouk!", font: CustomFont.interMediumFont(size: 55), colors: [UIColor(hex: "#EFD0DF")!, UIColor(hex: "#000000")!])
         self.subLabel.font = CustomFont.semiBoldFont(size: 18)
         self.subLabel.textColor = UIColor(hex: "#9C9EA0")
-        self.subLabel.text = "We have applied for the pre-approval"
+        self.subLabel.text = "Your application has been submitted"
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -96,7 +96,7 @@ class PolicyDisclaimerLabel: UILabel {
     private var interactiveRanges: [(NSRange, CGRect, URL)] = []
     
     func setupPolicyDisclaimer() {
-        let fullString = "By tapping sign up and using Ownly you\nagree to our terms and privacy policy."
+        let fullString = "By tapping sign up and using Yara you\nagree to our  terms  and  privacy policy. "
         let attributedString = NSMutableAttributedString(string: fullString)
         
         let attributes: [NSAttributedString.Key: Any] = [
@@ -134,8 +134,8 @@ class PolicyDisclaimerLabel: UILabel {
         interactiveRanges.removeAll()
         
         let keywordURLs = [
-            "terms": URL(string: "https://simly.io/terms")!,
-            "privacy policy": URL(string: "https://simly.io/privacy")!
+            "terms": URL(string: "https://www.getyara.io/terms")!,
+            "privacy policy": URL(string: "https://www.getyara.io/privacy")!
         ]
         
         keywordURLs.forEach { keyword, url in

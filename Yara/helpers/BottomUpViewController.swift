@@ -188,10 +188,10 @@ extension BottomUpViewController: UITableViewDataSource, UITableViewDelegate, MF
             
             guard let uid = Auth.auth().currentUser?.uid else {return}
             
-            guard let url = URL(string: "https://wa.me/971556895017?text=Hello,+I+need+help.+My+User+ID+\(uid)" /*"https://api.whatsapp.com/send?phone=971556895017"*/) else { return }
+            guard let url = URL(string: " https://bit.ly/yara-live-chat") else { return }
             UIApplication.shared.open(url)
         } else if indexPath.row == 1 {
-            openGmailCompose(to: "hello@simly.io")
+            openGmailCompose(to: "hello@getyara.io")
         } else if indexPath.row == data.count - 1 {
             dismiss(animated: true, completion: nil)
         }

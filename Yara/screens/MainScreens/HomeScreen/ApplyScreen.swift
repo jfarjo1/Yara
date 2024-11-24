@@ -18,7 +18,6 @@ class ApplyScreen: UIViewController {
     
     @IBOutlet weak var emiratesIDFrontTextField: UITextField!
     @IBOutlet weak var emiratesIDBackTextField: UITextField!
-    @IBOutlet weak var sixMonthBankSatementTextField: UITextField!
     
     @IBOutlet weak var applyButton: UIButton!
     
@@ -138,12 +137,7 @@ class ApplyScreen: UIViewController {
         self.emiratesIDBackTextField.placeholder = "Emirates ID Back"
         self.emiratesIDBackTextField.font = CustomFont.semiBoldFont(size: 14)
         self.addUploadButton(textField: self.emiratesIDBackTextField, tag: 2)
-        
-        self.sixMonthBankSatementTextField.setConfigForApply()
-        self.sixMonthBankSatementTextField.placeholder = "6 months bank statement"
-        self.sixMonthBankSatementTextField.font = CustomFont.semiBoldFont(size: 14)
-        self.addUploadButton(textField: self.sixMonthBankSatementTextField, tag: 3)
-        
+                
         self.applyButton.layer.cornerRadius = 45/2
         self.applyButton.clipsToBounds = true
         self.applyButton.setTitle("Submit", for: .normal)
@@ -168,7 +162,11 @@ class ApplyScreen: UIViewController {
             self.checkIfFieldsAreFilled()
         }
         
-        _ = TapGestureRecognizer.addTapGesture(to: learnMoreButton) {
+        TapGestureRecognizer.addTapGesture(to: learnMoreButton) {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(identifier: "BottomUpViewController") as! BottomUpViewController
+            
+            self.present(vc, animated: true)
         }
         
         _ = TapGestureRecognizer.addTapGesture(to: back_button) {
@@ -183,7 +181,7 @@ class ApplyScreen: UIViewController {
         uploadButton.setTitle("Upload", for: .normal)
         uploadButton.titleLabel?.font = font
         uploadButton.setTitleColor(.black, for: .normal)
-        uploadButton.frame = CGRect(x: padding, y: 0, width: buttonWidth, height: containerView.frame.height)
+        uploadButton.frame = CGRect(x: padding - 40, y: 0, width: buttonWidth, height: containerView.frame.height)
         uploadButton.tag = tag
         
         // Store reference to the button
@@ -322,7 +320,7 @@ class ApplyScreen: UIViewController {
 
 extension UITextField {
     func setConfigForApply() {
-        self.addDottedBorder(cornerRadius: 10, dotSize: 4, spacing: 4)
+        self.addDottedBorder(color: UIColor(hex: "#F7F7F7")!, lineWidth: 2, cornerRadius: 10, dashPattern: [4,4])
         self.setLeftPaddingPoints(20)
     }
 }
@@ -441,7 +439,6 @@ extension ApplyScreen {
         phoneNumberTextField.inputAccessoryView = doneToolbar
         emiratesIDFrontTextField.inputAccessoryView = doneToolbar
         emiratesIDBackTextField.inputAccessoryView = doneToolbar
-        sixMonthBankSatementTextField.inputAccessoryView = doneToolbar
     }
     
     @objc func doneButtonAction() {

@@ -38,7 +38,7 @@ class HowItWorksViewController: BasePopupViewController {
         titleLabel.text = "How it works"
         titleLabel.font = CustomFont.semiBoldFont(size: 22)
 
-        detailOneLabel.text = "1- Submit your details, and we will apply for your mortgage pre-approval."
+        detailOneLabel.text = "1- Submit your details, and we will guide you to apply for a mortgage pre-approval."
         detailOneLabel.textColor = UIColor(hex: "#999999")
         detailOneLabel.font = CustomFont.semiBoldFont(size: 15)
 
@@ -62,7 +62,11 @@ class HowItWorksViewController: BasePopupViewController {
         onetime_button.clipsToBounds = true
         onetime_button.titleLabel?.font = CustomFont.semiBoldFont(size: 13)
         onetime_button.setTitleColor(UIColor(hex: "#A9A9A9"), for: .normal)
-        onetime_button.applyGradient(colors: [(UIColor(hex:"#040404") ?? .black).cgColor, (UIColor(hex:"#636363") ?? .gray).cgColor])
+        onetime_button.applyGradient(colors: [(UIColor(hex:"#040404") ?? .black).cgColor,
+                                              (UIColor(hex:"#343434") ?? .gray).cgColor,
+                                              (UIColor(hex:"#4B4B4B") ?? .black).cgColor,
+                                              (UIColor(hex:"#575757") ?? .gray).cgColor,
+                                              (UIColor(hex:"#636363") ?? .black).cgColor,])
         
         onetime_info.text = "and \(self.apartment?.perMonth ?? "500$") per month"
         onetime_info.textColor = UIColor(hex: "#999999")
@@ -90,6 +94,13 @@ class HowItWorksViewController: BasePopupViewController {
             self.dismiss(animated: true) {
                 self.delegate?.onDismiss(type: self.popupType)
             }
+        }
+        
+        TapGestureRecognizer.addTapGesture(to: learnMore_button) {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(identifier: "BottomUpViewController") as! BottomUpViewController
+            
+            self.present(vc, animated: true)
         }
     }
 }

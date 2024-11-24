@@ -9,23 +9,66 @@ import UIKit
 
 extension UITextField {
     
-    func addDottedBorder(cornerRadius: CGFloat = 5.0, dotSize: CGFloat = 4, spacing: CGFloat = 4) {
-        let borderLayer = CAShapeLayer()
-        borderLayer.strokeColor = UIColor(hex: "#D8D8D8")?.cgColor
-        borderLayer.lineDashPattern = [NSNumber(value: Float(dotSize)), NSNumber(value: Float(spacing))]
-        borderLayer.fillColor = nil
-        borderLayer.lineWidth = 2
+    func addDottedBorder(
+            color: UIColor = .black,
+            lineWidth: CGFloat = 1.0,
+            cornerRadius: CGFloat = 8.0,
+            dashPattern: [NSNumber] = [4, 4]
+        ) {
+            // Remove any existing border layers
+            layer.sublayers?.forEach { layer in
+                if layer is CAShapeLayer {
+                    layer.removeFromSuperlayer()
+                }
+            }
+            
+            // Create a CAShapeLayer
+            let borderLayer = CAShapeLayer()
+            
+            // Create a path for the border with corner radius
+            // Adjust the rect to account for the line width
+            let pathRect = bounds.insetBy(dx: lineWidth/2, dy: lineWidth/2)
+            let path = UIBezierPath(
+                roundedRect: pathRect,
+                cornerRadius: cornerRadius
+            )
+            
+            // Configure the border appearance
+            borderLayer.path = path.cgPath
+            borderLayer.strokeColor = color.cgColor
+            borderLayer.lineDashPattern = dashPattern
+            borderLayer.lineWidth = lineWidth
+            borderLayer.fillColor = nil
+            
+            // Important: Set frame to bounds
+            borderLayer.frame = bounds
+            
+            // Make sure the border follows the corner radius
+            layer.cornerRadius = cornerRadius
+            layer.masksToBounds = true
+            
+            // Add the border layer
+            layer.addSublayer(borderLayer)
+            
+            // Set border layer name for identification
+            borderLayer.name = "DottedBorder"
+        }
         
-        // Calculate the frame for the border, leaving space on the right
-        let borderFrame = bounds.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -25))
-        
-        let path = UIBezierPath(roundedRect: borderFrame, cornerRadius: cornerRadius)
-        borderLayer.path = path.cgPath
-        
-        layer.addSublayer(borderLayer)
-        layer.cornerRadius = cornerRadius
-        clipsToBounds = true
-    }
+        // Method to update border when frame changes
+        func updateDottedBorder() {
+            guard let borderLayer = layer.sublayers?.first(where: { $0.name == "DottedBorder" }) as? CAShapeLayer else { return }
+            
+            // Update the path with the new bounds
+            let pathRect = bounds.insetBy(dx: borderLayer.lineWidth/2, dy: borderLayer.lineWidth/2)
+            let path = UIBezierPath(
+                roundedRect: pathRect,
+                cornerRadius: layer.cornerRadius
+            )
+            
+            // Update the layer
+            borderLayer.path = path.cgPath
+            borderLayer.frame = bounds
+        }
     
     func setRightPadding(_ amount: CGFloat) {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))

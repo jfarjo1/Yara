@@ -108,12 +108,33 @@ class MyHomeVC: UIViewController {
         setupMainContent()
         setupProgressView()
         
+        
+        
+        buttonGestures()
+    }
+    
+    func buttonGestures() {
+        TapGestureRecognizer.addTapGesture(to: learnMoreButton) {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(identifier: "BottomUpViewController") as! BottomUpViewController
+            self.present(vc, animated: true)
+        }
+        
         TapGestureRecognizer.addTapGesture(to: whatsappView) {
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let vc = sb.instantiateViewController(identifier: "BottomUpViewController") as! BottomUpViewController
-//            vc.modalTransitionStyle = .coverVertical
             
             self.present(vc, animated: true)
+        }
+        
+        TapGestureRecognizer.addTapGesture(to: element_two_button) {
+            guard let url = URL(string: "https://www.getyara.io/terms") else { return }
+            UIApplication.shared.open(url)
+        }
+        
+        TapGestureRecognizer.addTapGesture(to: element_three_button) {
+            guard let url = URL(string: "google.com") else { return }
+            UIApplication.shared.open(url)
         }
     }
     
@@ -171,7 +192,7 @@ class MyHomeVC: UIViewController {
         progres_three_number_label.textColor = .init(hex: "999999")
         
         // Steps label
-        steps_label.text = "Step"
+        steps_label.text = "Steps"
         steps_label.font = CustomFont.boldFont(size: 16)
         steps_label.textColor = .init(hex: "9D9D9D")
         
@@ -224,6 +245,13 @@ class MyHomeVC: UIViewController {
         learnMoreButton.titleLabel?.font = CustomFont.semiBoldFont(size: 10)
         learnMoreButton.backgroundColor = UIColor(hex: "#F9FAFB")
         
+        
+        TapGestureRecognizer.addTapGesture(to: learnMoreButton) {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(identifier: "BottomUpViewController") as! BottomUpViewController
+            
+            self.present(vc, animated: true)
+        }
         // Initially hide main content
         mainContentView.isHidden = true
     }
@@ -337,17 +365,12 @@ class MyHomeVC: UIViewController {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
-            // Stop and clear animation to free memory
             self.animationView.stop()
             self.animationView.animation = nil
             
             self.emptyStateView.isHidden = true
             self.mainContentView.isHidden = false
-            
-            // Initialize progress if needed
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.progressBarView?.animateProgress(to: 1)
-            }
+        
         }
     }
     
