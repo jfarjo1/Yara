@@ -31,6 +31,8 @@ class ProfileScreenVC: UIViewController {
     @IBOutlet var profileImage: UIImageView!
     @IBOutlet var lblEmail: UILabel!
     
+    @IBOutlet weak var profileViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var itemHeight: NSLayoutConstraint!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var userId: String = ""
     var userFullName: String = ""
@@ -41,6 +43,8 @@ class ProfileScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.itemHeight.constant = ScreenRatioHelper.adjustedHeight(50)
+        self.profileViewHeight.constant = ScreenRatioHelper.adjustedHeight(80)
         profileImage.setRounded()
         setupInterface()
     }
@@ -73,18 +77,18 @@ class ProfileScreenVC: UIViewController {
     }
     
     func setupFonts() {
-        profileLabel.font = CustomFont.boldFont(size: 22)
+//        profileLabel.font = CustomFont.boldFont(size: 22)
         accountLabel.font = CustomFont.semiBoldFont(size: 25)
         name.font = CustomFont.semiBoldFont(size: 23)
         lblEmail.font = CustomFont.semiBoldFont(size: 16)
         settingsLabel.font = CustomFont.semiBoldFont(size: 25)
         
-        liveChatLabel.font = CustomFont.semiBoldFont(size: 23)
-        helpLabel.font = CustomFont.semiBoldFont(size: 23)
-        privacyLabel.font = CustomFont.semiBoldFont(size: 23)
-        termsLabel.font = CustomFont.semiBoldFont(size: 23)
-        signoutLabel.font = CustomFont.semiBoldFont(size: 23)
-        deleteLabel.font = CustomFont.semiBoldFont(size: 23)
+        liveChatLabel.font = CustomFont.semiBoldFont(size: 22)
+        helpLabel.font = CustomFont.semiBoldFont(size: 22)
+        privacyLabel.font = CustomFont.semiBoldFont(size: 22)
+        termsLabel.font = CustomFont.semiBoldFont(size: 22)
+        signoutLabel.font = CustomFont.semiBoldFont(size: 22)
+        deleteLabel.font = CustomFont.semiBoldFont(size: 22)
     }
     
     @IBAction func liveChatPressed(_ sender: Any) {

@@ -3,17 +3,18 @@ import UIKit
 class OnbOne: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var label: UILabel!
+    
     @IBOutlet weak var imageView_center: UIImageView!
+    
+    @IBOutlet weak var logoHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.label.numberOfLines = 3
-        self.label.setGradientTextColor(text: "Renting costs you money without ownership", font: CustomFont.interMediumFont(size: 35), colors: [UIColor(hex: "#848484")!, UIColor(hex: "#C1C1C1")!])
-        
         self.imageView.layer.masksToBounds = true
         self.imageView.layer.cornerRadius = 30
+        
+        self.logoHeight.constant = ScreenRatioHelper.adjustedHeight(317)
         
         imageView.addSubview(imageView_center)
         

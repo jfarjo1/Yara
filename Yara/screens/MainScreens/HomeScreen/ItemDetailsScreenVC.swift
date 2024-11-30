@@ -26,110 +26,116 @@ class ItemDetailsScreenVC: UIViewController {
     @IBOutlet weak var close_btn_view: UIView!
     @IBOutlet weak var descriptionTextViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var imageCarouselHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var priceButtonHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var stackItemHeight: NSLayoutConstraint!
+    @IBOutlet weak var showAllButtonHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var buyNowHeight: NSLayoutConstraint!
     private var fullText = ""
     private let maxLines = 4
     private var isExpanded = false
     private var fullTextHeight: CGFloat = 0
-    private let initialTextViewHeight: CGFloat = 85
+    private let initialTextViewHeight: CGFloat = ScreenRatioHelper.adjustedHeight(74)
     
     var apartment:Apartment? = nil
     var hasApplication = -1
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         UserService().checkUserApplication { result in
             switch result {
-            case .success(var hasApplication):
+            case .success(let hasApplication):
                 self.hasApplication = hasApplication ? 1 : 0
-            case .failure(let error):
+            case .failure(_):
                 self.hasApplication = -1
             }
         }
-        setupUI()
-        if let apartment = apartment {
-            updateUIWithApartment(apartment)
-        }
+        setupUI(with: apartment)
     }
     
-    private func updateUIWithApartment(_ apartment: Apartment) {
-        // Update all content with actual data
-        title_label.text = apartment.name
-        title_label.font = CustomFont.semiBoldFont(size: 20)
-        title_label.textColor = UIColor(hex: "#0A0908")
-        // Price button text with safe formatting
-        price_btn.setTitle("One time: \(apartment.oneTime)", for: .normal)
-        
-        // Monthly price with safe formatting
-        price_label.text = "and \(apartment.perMonth) monthly"
-        
-        fullText = apartment.description
-        
-        description_textView.text = apartment.description
-        
-        // Update property details
-        area_label.text = apartment.area
-        property_label.text = apartment.propertySize
-        bedrooms_label.text = apartment.bedrooms
-        bathrooms_label.text = apartment.bathrooms
-        service_label.text = apartment.serviceCharge
-        
-        location_Btn.setTitleColor(UIColor(hex: "#222222"), for: .normal)
-        location_Btn.setTitle("Tap to view", for: .normal)
-        location_Btn.titleLabel?.font = CustomFont.semiBoldFont(size: 14)
-        
-        let processedImageUrls = apartment.imageUrls.flatMap { urlString in
-            urlString.split(separator: " ").map(String.init)
-        }
-        
-        loadImages(from: processedImageUrls) { [weak self] images in
-            guard let self = self else { return }
-            if let carouselView = self.top_carousel.subviews.first as? ImageCarouselView {
-                carouselView.hideTopLeftLabel()
-                carouselView.configure(with: images, topLeftText: nil)
-            }
-        }
-        calculateFullTextHeight()
-    }
+//    private func updateUIWithApartment(_ apartment: Apartment) {
+//        // Update all content with actual data
+//        title_label.text = apartment.name
+//        title_label.font = CustomFont.semiBoldFont(size: 20)
+//        title_label.textColor = UIColor(hex: "#0A0908")
+//        // Price button text with safe formatting
+//        price_btn.setTitle("One time: \(apartment.oneTime)", for: .normal)
+//        
+//        // Monthly price with safe formatting
+//        price_label.text = "and \(apartment.perMonth) monthly"
+//        
+//        fullText = apartment.description
+//        
+//        description_textView.text = apartment.description
+//        
+//        // Update property details
+//        area_label.text = apartment.area
+//        property_label.text = apartment.propertySize
+//        bedrooms_label.text = apartment.bedrooms
+//        bathrooms_label.text = apartment.bathrooms
+//        service_label.text = apartment.serviceCharge
+//        
+//        location_Btn.setTitleColor(UIColor(hex: "#222222"), for: .normal)
+//        location_Btn.setTitle("Tap to view", for: .normal)
+//        location_Btn.titleLabel?.font = CustomFont.semiBoldFont(size: 14)
+//        
+//        let processedImageUrls = apartment.imageUrls.flatMap { urlString in
+//            urlString.split(separator: " ").map(String.init)
+//        }
+//        
+//        loadImages(from: processedImageUrls) { [weak self] images in
+//            guard let self = self else { return }
+//            if let carouselView = self.top_carousel.subviews.first as? ImageCarouselView {
+//                carouselView.hideTopLeftLabel()
+//                carouselView.configure(with: images, topLeftText: nil)
+//            }
+//        }
+//        calculateFullTextHeight()
+//    }
     
     // Helper method to safely format currency values
     private func formatCurrency(_ value: Double) -> String {
         return String(format: "%.2f$", value)
     }
     
-    private func setupCarouselWithApartmentImages(_ apartment: Apartment) {
-        guard let containerView = top_carousel else {
-            print("Error: Could not find carousel container view")
-            return
-        }
-        
-        let carouselView: ImageCarouselView
-        if let existingCarouselView = containerView.subviews.first as? ImageCarouselView {
-            carouselView = existingCarouselView
-            carouselView.hideTopLeftLabel()
-        } else {
-            carouselView = ImageCarouselView()
-            carouselView.translatesAutoresizingMaskIntoConstraints = false
-            containerView.addSubview(carouselView)
-            carouselView.hideTopLeftLabel()
-            NSLayoutConstraint.activate([
-                carouselView.topAnchor.constraint(equalTo: containerView.topAnchor),
-                carouselView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-                carouselView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-                carouselView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
-            ])
-        }
-        
-        // Process image URLs (they seem to be space-separated in the string)
-        let processedImageUrls = apartment.imageUrls.flatMap { urlString in
-            urlString.split(separator: " ").map(String.init)
-        }
-        
-        // Load images from URLs
-        loadImages(from: processedImageUrls) { images in
-            carouselView.configure(with: images, topLeftText: nil)
-            carouselView.hideTopLeftLabel()
-        }
-    }
+//    private func setupCarouselWithApartmentImages(_ apartment: Apartment) {
+//        guard let containerView = top_carousel else {
+//            print("Error: Could not find carousel container view")
+//            return
+//        }
+//        
+//        let carouselView: ImageCarouselView
+//        if let existingCarouselView = containerView.subviews.first as? ImageCarouselView {
+//            carouselView = existingCarouselView
+//            carouselView.hideTopLeftLabel()
+//        } else {
+//            carouselView = ImageCarouselView()
+//            carouselView.translatesAutoresizingMaskIntoConstraints = false
+//            containerView.addSubview(carouselView)
+//            carouselView.hideTopLeftLabel()
+//            NSLayoutConstraint.activate([
+//                carouselView.topAnchor.constraint(equalTo: containerView.topAnchor),
+//                carouselView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+//                carouselView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+//                carouselView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+//            ])
+//        }
+//        
+//        // Process image URLs (they seem to be space-separated in the string)
+//        let processedImageUrls = apartment.imageUrls.flatMap { urlString in
+//            urlString.split(separator: " ").map(String.init)
+//        }
+//        
+//        // Load images from URLs
+//        loadImages(from: processedImageUrls) { images in
+//            carouselView.configure(with: images, topLeftText: nil)
+//            carouselView.hideTopLeftLabel()
+//        }
+//    }
     
     private func loadImages(from urls: [String], completion: @escaping ([UIImage]) -> Void) {
         var images: [UIImage] = []
@@ -157,41 +163,57 @@ class ItemDetailsScreenVC: UIViewController {
     }
     
     
-    func setupUI() {
+    private func setupUI(with apartment: Apartment? = nil) {
+        // Setup carousel view and constraints
         self.setupCarouselView()
-        
+        self.imageCarouselHeight.constant = ScreenRatioHelper.adjustedHeight(300)
+        self.showAllButtonHeight.constant = ScreenRatioHelper.adjustedHeight(23)
+        self.stackItemHeight.constant = ScreenRatioHelper.adjustedHeight(35)
+        self.priceButtonHeight.constant = ScreenRatioHelper.adjustedHeight(33)
+        self.buyNowHeight.constant = ScreenRatioHelper.adjustedHeight(45)
         self.close_btn_view.setRounded()
         
-        self.title_label.text = "Studio in Damac Maison Prive"
+        if let apartment = apartment {
+            price_btn.setTitle("One time: \(apartment.oneTime)", for: .normal)
+            price_label.text = "and \(apartment.perMonth) monthly"
+        }
         
-        price_btn.setTitle("One time: $25000k", for: .normal)
-        price_btn.layer.cornerRadius = 33/2
+        // Configure title
+        title_label.font = CustomFont.semiBoldFont(size: 20)
+        title_label.textColor = UIColor(hex: "#0A0908")
+        title_label.text = apartment?.name ?? ""
+        
+        // Configure price button
+        price_btn.layer.cornerRadius = ScreenRatioHelper.adjustedHeight(33)/2
         price_btn.titleLabel?.font = CustomFont.semiBoldFont(size: 13)
         price_btn.setTitleColor(UIColor(hex: "#A9A9A9"), for: .normal)
         price_btn.applyGradient(colors: [(UIColor(hex:"#040404") ?? .black).cgColor,
-                                         (UIColor(hex:"#343434") ?? .gray).cgColor,
-                                         (UIColor(hex:"#4B4B4B") ?? .black).cgColor,
-                                         (UIColor(hex:"#575757") ?? .gray).cgColor,
-                                         (UIColor(hex:"#636363") ?? .black).cgColor,])
+                                        (UIColor(hex:"#343434") ?? .gray).cgColor,
+                                        (UIColor(hex:"#4B4B4B") ?? .black).cgColor,
+                                        (UIColor(hex:"#575757") ?? .gray).cgColor,
+                                        (UIColor(hex:"#636363") ?? .black).cgColor])
         
-        price_label.text = "and 1000$ per month"
+        
+        // Configure price label
         price_label.textColor = UIColor(hex: "#999999")
         price_label.font = CustomFont.semiBoldFont(size: 13)
         
-        show_full.layer.cornerRadius = 23/2
+        // Configure show full button
+        show_full.layer.cornerRadius = ScreenRatioHelper.adjustedHeight(23)/2
         show_full.setTitle("Show full description", for: .normal)
         show_full.backgroundColor = UIColor(hex: "#F8F8FA")
         show_full.titleLabel?.font = CustomFont.boldFont(size: 10)
         show_full.setTitleColor(UIColor(hex: "#A3A5A4"), for: .normal)
         
-        buy_now.layer.cornerRadius = 45/2
+        // Configure buy now button
+        buy_now.layer.cornerRadius = ScreenRatioHelper.adjustedHeight(45)/2
         buy_now.clipsToBounds = true
         buy_now.setTitle("Get Now", for: .normal)
         buy_now.backgroundColor = UIColor(hex: "#484848")
         buy_now.titleLabel?.font = CustomFont.semiBoldFont(size: 17)
         buy_now.setTitleColor(UIColor(hex: "#FFFFFF"), for: .normal)
         
-        description_textView.text = fullText
+        // Configure description text view
         description_textView.textContainerInset = .zero
         description_textView.textContainer.lineFragmentPadding = 0
         description_textView.textContainer.maximumNumberOfLines = maxLines
@@ -200,30 +222,42 @@ class ItemDetailsScreenVC: UIViewController {
         description_textView.textColor = UIColor(hex: "#999999")
         description_textView.font = CustomFont.semiBoldFont(size: 15)
         
-        area_label.text = "Business Bay"
-        area_label.font = CustomFont.semiBoldFont(size: 14)
-        area_label.textColor = UIColor(hex: "#222222")
+        if let apartment = apartment {
+            fullText = apartment.description
+            description_textView.text = apartment.description
+            
+            // Update property details
+            area_label.text = apartment.area
+            property_label.text = apartment.propertySize
+            bedrooms_label.text = apartment.bedrooms
+            bathrooms_label.text = apartment.bathrooms
+            service_label.text = apartment.serviceCharge
+            
+            // Process and load images
+            let processedImageUrls = apartment.imageUrls.flatMap { urlString in
+                urlString.split(separator: " ").map(String.init)
+            }
+            
+            loadImages(from: processedImageUrls) { [weak self] images in
+                guard let self = self else { return }
+                if let carouselView = self.top_carousel.subviews.first as? ImageCarouselView {
+                    carouselView.hideTopLeftLabel()
+                    carouselView.configure(with: images, topLeftText: nil)
+                }
+            }
+        }
         
-        property_label.text = "Business Bay"
-        property_label.font = CustomFont.semiBoldFont(size: 14)
-        property_label.textColor = UIColor(hex: "#222222")
+        // Configure property detail labels
+        let detailLabels = [area_label, property_label, bedrooms_label, bathrooms_label, service_label]
+        detailLabels.forEach { label in
+            label?.font = CustomFont.semiBoldFont(size: 14)
+            label?.textColor = UIColor(hex: "#222222")
+        }
         
-        bedrooms_label.text = "Business Bay"
-        bedrooms_label.font = CustomFont.semiBoldFont(size: 14)
-        bedrooms_label.textColor = UIColor(hex: "#222222")
-        
-        bathrooms_label.text = "Business Bay"
-        bathrooms_label.font = CustomFont.semiBoldFont(size: 14)
-        bathrooms_label.textColor = UIColor(hex: "#222222")
-        
-        service_label.text = "Business Bay"
-        service_label.font = CustomFont.semiBoldFont(size: 14)
-        service_label.textColor = UIColor(hex: "#222222")
-        
+        // Configure location button
         location_Btn.setTitleColor(UIColor(hex: "#222222"), for: .normal)
         location_Btn.setTitle("Tap to view", for: .normal)
         location_Btn.titleLabel?.font = CustomFont.semiBoldFont(size: 14)
-        
         
         // Set initial height
         descriptionTextViewHeightConstraint.constant = initialTextViewHeight
@@ -232,9 +266,7 @@ class ItemDetailsScreenVC: UIViewController {
         DispatchQueue.main.async {
             self.calculateFullTextHeight()
         }
-        
     }
-    
     private func calculateFullTextHeight() {
         let textView = UITextView(frame: CGRect(x: 0, y: 0, width: description_textView.bounds.width, height: .greatestFiniteMagnitude))
         textView.text = fullText
@@ -278,7 +310,7 @@ class ItemDetailsScreenVC: UIViewController {
             vc.delegate = self
             self.present(vc, animated: true)
         }else if hasApplication == 1 {
-            self.showAlert(title:"Can't Buy Now", message: "You already have a pending application.")
+            self.showAlert(title:"Application Submitted", message: "You already have a pending application. Please contact our support via WhatsApp")
         }
         
     }

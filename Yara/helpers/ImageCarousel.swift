@@ -50,7 +50,7 @@ class ImageCarouselView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.font = CustomFont.semiBoldFont(size: 13)
-        label.textColor = UIColor(hex: "#000000")?.withAlphaComponent(0.22)
+        label.textColor = UIColor(hex: "#A6B4BD")?.withAlphaComponent(0.7)
         label.backgroundColor = UIColor(hex: "#FFFFFF")?.withAlphaComponent(0.33)
         label.layer.cornerRadius = 13.5
         label.clipsToBounds = true
@@ -101,8 +101,8 @@ class ImageCarouselView: UIView {
         topLeftLabelConstraints = [
             topLeftLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             topLeftLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            topLeftLabel.widthAnchor.constraint(equalToConstant: 79),
-            topLeftLabel.heightAnchor.constraint(equalToConstant: 27)
+            topLeftLabel.widthAnchor.constraint(equalToConstant: ScreenRatioHelper.adjustedHeight(85)),
+            topLeftLabel.heightAnchor.constraint(equalToConstant: ScreenRatioHelper.adjustedHeight(27))
         ]
         NSLayoutConstraint.activate(topLeftLabelConstraints)
         

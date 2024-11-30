@@ -50,6 +50,10 @@ class MyHomeVC: UIViewController {
     
     @IBOutlet weak var whatsappView: UIView!
     
+    @IBOutlet weak var cardOneHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var cardStackHeight: NSLayoutConstraint!
+    
     // MARK: - Properties
     private var progressBarView: ProgressBarView!
     
@@ -94,6 +98,8 @@ class MyHomeVC: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.cardOneHeight.constant = ScreenRatioHelper.adjustedHeight(179)
+        self.cardStackHeight.constant = ScreenRatioHelper.adjustedHeight(118)
         setupUI()
         setupEmptyStateView()
     }
@@ -140,7 +146,6 @@ class MyHomeVC: UIViewController {
     
     private func setupMainContent() {
         // Page title
-        pageTitle.font = CustomFont.boldFont(size: 22)
         
         // Element one
         element_one_view.layer.cornerRadius = 20
@@ -202,7 +207,7 @@ class MyHomeVC: UIViewController {
         element_two_title.text = "1- Pre-Approval"
         element_two_title.font = CustomFont.semiBoldFont(size: 18)
         element_two_title.textColor = .init(hex: "222222")
-        element_two_subtitle.text = "Mortgage pre-approval means getting approved for a loan from the bank to buy a property."
+        element_two_subtitle.attributedText = getAttributedString(with: "Mortgage pre-approval means getting approved for a loan from the bank to buy a property.")
         element_two_subtitle.font = CustomFont.semiBoldFont(size: 13)
         element_two_subtitle.textColor = .init(hex: "999999")
         element_two_button.setTitle("View Terms", for: .normal)
@@ -217,7 +222,7 @@ class MyHomeVC: UIViewController {
         element_three_title.text = "2- View Property"
         element_three_title.font = CustomFont.semiBoldFont(size: 18)
         element_three_title.textColor = .init(hex: "222222")
-        element_three_subtitle.text = "Our agent will contact you to schedule a viewing and finalize the purchase process."
+        element_three_subtitle.attributedText = getAttributedString(with: "Our agent will contact you to schedule a viewing and finalize the purchase process.")
         element_three_subtitle.font = CustomFont.semiBoldFont(size: 13)
         element_three_subtitle.textColor = .init(hex: "999999")
         element_three_button.setTitle("Schedule", for: .normal)
@@ -232,9 +237,8 @@ class MyHomeVC: UIViewController {
         element_four_title.text = "3- Purchase"
         element_four_title.font = CustomFont.semiBoldFont(size: 18)
         element_four_title.textColor = .init(hex: "222222")
-        element_four_subtitle.text = "After purchase, you pay the monthly mortgage directly to the bank instead of rent. You can sell the property and close the mortgage at any time."
-        element_four_subtitle.font = CustomFont.semiBoldFont(size: 13)
-        element_four_subtitle.textColor = .init(hex: "999999")
+        
+        element_four_subtitle.attributedText = getAttributedString(with: "After purchase, you pay the monthly mortgage directly to the bank instead of rent. You can sell\nthe property and close the mortgage at any time.")
         
         // Learn more section
         learnMoreLabel.text = "100% Free. No hidden fees."
@@ -254,6 +258,20 @@ class MyHomeVC: UIViewController {
         }
         // Initially hide main content
         mainContentView.isHidden = true
+    }
+    
+    private func getAttributedString(with text: String) -> NSAttributedString{
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.2
+
+        return NSAttributedString(
+            string: text,
+            attributes: [
+                .paragraphStyle: paragraphStyle,
+                .font: CustomFont.semiBoldFont(size: 13),
+                .foregroundColor: UIColor(hex: "999999")!
+            ]
+        )
     }
     
     private func setupEmptyStateView() {

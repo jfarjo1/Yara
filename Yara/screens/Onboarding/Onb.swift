@@ -54,7 +54,7 @@ class Onb: UIPageViewController, UIPageViewControllerDataSource, UIPageViewContr
     }
 
     func configureForwardButton() {
-        let buttonSize: CGFloat = 60
+        let buttonSize: CGFloat = 70
         let buttonYPosition = UIScreen.main.bounds.maxY - 70 - 30 - buttonSize
         
         forwardButton.frame = CGRect(x: (UIScreen.main.bounds.width - buttonSize) / 2,

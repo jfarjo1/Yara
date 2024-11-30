@@ -45,7 +45,7 @@ class FirstnameVC: UIViewController, UITextFieldDelegate {
         self.backButtonImage.image = UIImage(named: "back_arrow")
         
         firstnameLabel.text = "whats_firstname".localized
-        firstnameLabel.font = CustomFont.semiBoldFont(size: 33)
+        firstnameLabel.font = CustomFont.semiBoldFont(size: 30)
         
         subtitleLabel.text = "choose_display_name".localized
         subtitleLabel.font = CustomFont.semiBoldFont(size: 18)

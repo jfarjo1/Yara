@@ -17,9 +17,6 @@ class EnterPassword: UIViewController, UITextFieldDelegate {
     @IBOutlet var loginLabel: UILabel!
     @IBOutlet weak var backButtonImage: UIImageView!
     @IBOutlet var resetPasswordLabel: UILabel!
-    @IBOutlet var statusBgView: UIView!
-    @IBOutlet var statusLabel: UILabel!
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var resetPasswordView: UIView!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -48,7 +45,6 @@ class EnterPassword: UIViewController, UITextFieldDelegate {
         passwordTextField.isSecureTextEntry = true
         
         if !isSignUp {
-            statusBgView.isHidden = true
             resetPasswordLabel.isHidden = false
             _ = TapGestureRecognizer.addTapGesture(to: resetPasswordLabel, action: {
                 self.resetPassword()
@@ -110,9 +106,6 @@ class EnterPassword: UIViewController, UITextFieldDelegate {
     }
     
     private func setupSignUpInterface() {
-        statusBgView.layer.masksToBounds = true
-        statusBgView.layer.cornerRadius = 13
-        statusBgView.isHidden = true
         self.backButtonImage.image = UIImage(named: "back_arrow")
         
         titleLabel.text = "Choose a password"
@@ -123,9 +116,7 @@ class EnterPassword: UIViewController, UITextFieldDelegate {
         
         passwordTextField.placeholder = "Password"
         passwordTextField.font = CustomFont.semiBoldFont(size: 29)
-        
-        statusLabel.font = CustomFont.semiBoldFont(size: 15)
-        
+                
         loginLabel.text = "Next"
         loginLabel.font = CustomFont.semiBoldFont(size: 22)
     }
@@ -400,12 +391,6 @@ class EnterPassword: UIViewController, UITextFieldDelegate {
         } else {
             print("added email")
             
-            statusBgView.backgroundColor = UIColor(hex: "#60FF91")?.withAlphaComponent(0.22)
-            statusBgView.isHidden = false
-            statusBgView.popIn()
-            activityIndicator.startAnimating()
-            statusLabel.text = "creating_account".localized
-            
             var userService = UserService()
             Auth.auth().createUser(withEmail: userEmail, password: password) { _, error in
                 if error == nil {
@@ -417,7 +402,6 @@ class EnterPassword: UIViewController, UITextFieldDelegate {
                         self.navigationController?.fadeTo(vc)
                     })
                 } else if let error = error as NSError? {
-                    self.statusBgView.isHidden = true
                     
                     if let displayNameError = error.userInfo[AuthErrorUserInfoNameKey] as? String, displayNameError == "ERROR_EMAIL_ALREADY_IN_USE" {
                         self.signIn(email: self.userEmail, password: password)

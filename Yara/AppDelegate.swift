@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseCore
+import OneSignalFramework
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        // Remove this method to stop OneSignal Debugging
+          OneSignal.Debug.setLogLevel(.LL_VERBOSE)
+          
+          // OneSignal initialization
+          OneSignal.initialize("21a9405b-5645-474b-bbc5-f3663a4d3342", withLaunchOptions: launchOptions)
+          
+          
+          // Login your customer with externalId
+          // OneSignal.login("EXTERNAL_ID")
+        
         return true
     }
 

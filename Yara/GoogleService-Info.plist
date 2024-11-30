@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.Yara</string>
+	<string>io.getyara.yaraios</string>
 	<key>PROJECT_ID</key>
 	<string>yara-tech</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:963576481242:ios:4d5a2afc51e2b5fb29ece3</string>
+	<string>1:963576481242:ios:2f6846ccce42484b29ece3</string>
 </dict>
 </plist>

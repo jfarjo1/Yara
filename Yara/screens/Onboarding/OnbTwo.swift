@@ -10,15 +10,13 @@ import UIKit
 class OnbTwo: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var label: UILabel!
     @IBOutlet weak var imageView_center: UIImageView!
     
+    @IBOutlet weak var logoHeight: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.label.numberOfLines = 3
-        self.label.setGradientTextColor(text: "We make owning a home in Dubai a seamless journey", font: CustomFont.interMediumFont(size: 35), colors: [UIColor(hex: "#B0B5D5")!, UIColor(hex: "#B0B5D5")!])
-        
+        self.logoHeight.constant = ScreenRatioHelper.adjustedHeight(492)
         self.imageView.layer.masksToBounds = true
         self.imageView.layer.cornerRadius = 30
         
@@ -32,9 +30,7 @@ class OnbTwo: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.imageView_center.popIn(duration: 2, completion: { _ in
-            self.addMotionEffects()
-        })
+        self.addMotionEffects()
     }
     
     func addMotionEffects() {

@@ -6,6 +6,8 @@
 //
 import UIKit
 
+import FirebaseAuth
+
 class Welcome: UIViewController {
     
     @IBOutlet weak var center_image:UIImageView!
@@ -22,17 +24,21 @@ class Welcome: UIViewController {
     @IBOutlet weak var label_signup:UILabel!
     @IBOutlet weak var signup:UIView!
     @IBOutlet weak var label_policy_disclaimer:PolicyDisclaimerLabel!
-
-
+    
+    @IBOutlet weak var logoHeight: NSLayoutConstraint!
+    private var signInManager: SignInWithAppleManager?
+    private let localStorage = LocalStorageManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        signInManager = SignInWithAppleManager()
         self.setupUI()
     }
     
     func setupUI() {
-        title_label.setGradientTextColor(text: "Meet Yara", font: CustomFont.interMediumFont(size: 45), colors: [UIColor(hex: "#848484")!, UIColor(hex: "#C1C1C1")!])
-        
-        subtitle_label.setGradientTextColor(text: "from renting to owning, made simple.", font: CustomFont.interMediumFont(size: 18), colors: [UIColor(hex: "#848484")!, UIColor(hex: "#C1C1C1")!])
+        //        title_label.setGradientTextColor(text: "Meet Yara", font: CustomFont.interMediumFont(size: 45), colors: [UIColor(hex: "#848484")!, UIColor(hex: "#C1C1C1")!])
+        //        self.logoHeight.constant = ScreenRatioHelper.adjustedHeight(292)
+        //        subtitle_label.setGradientTextColor(text: "from renting to owning, made simple.", font: CustomFont.interMediumFont(size: 18), colors: [UIColor(hex: "#848484")!, UIColor(hex: "#C1C1C1")!])
         
         signUpEmail.layer.cornerRadius = 20
         signUpEmail.backgroundColor = UIColor.init(hex: "#F8F8FA")
@@ -65,16 +71,30 @@ class Welcome: UIViewController {
         label_signup.text = "Sign in"
         
         label_signup.font = CustomFont.boldFont(size: 12)
-       
+        
         
         label_policy_disclaimer.setupPolicyDisclaimer()
         label_policy_disclaimer.font = CustomFont.semiBoldFont(size: 10)
     }
     
     @objc func applePressed(_ sender: UITapGestureRecognizer) {
-        TapticEngine.impact.feedback(.medium)
-//        startSignInWithAppleFlow()
-    }
+            TapticEngine.impact.feedback(.medium)
+            
+            signInManager?.startSignInWithAppleFlow { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let firebaseUser):
+                        print("Successfully signed in with Firebase: \(firebaseUser.uid)")
+                        // Now using firebaseUser parameter name to be more explicit
+                        self?.handleSuccessfulSignIn(firebaseUser: firebaseUser)
+                        
+                    case .failure(let error):
+                        print("Error signing in: \(error.localizedDescription)")
+                        self?.showSignInError(error: error)
+                    }
+                }
+            }
+        }
     
     @objc func signupEmailPressed(_ sender: UITapGestureRecognizer) {
         TapticEngine.impact.feedback(.medium)
@@ -90,6 +110,45 @@ class Welcome: UIViewController {
         let vc = sb.instantiateViewController(withIdentifier: "EnterEmail") as! EnterEmail
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    private func handleSuccessfulSignIn(firebaseUser: FirebaseAuth.User) {
+            // Create your custom User model from Firebase user
+            let user = User(
+                uid: firebaseUser.uid,
+                email: firebaseUser.email ?? "",
+                firstName: firebaseUser.displayName ?? "Yara User"
+                // Add any other properties your Yara.User model requires
+                // You might need to modify these based on your User model structure
+                // Add other fields as needed...
+            )
+            
+            // Save user data to UserDefaults or your preferred storage
+            UserDefaults.standard.set(user.uid, forKey: "userID")
+            UserDefaults.standard.set(user.email, forKey: "userEmail")
+            
+            // Post notification with your custom user model
+            NotificationCenter.default.post(
+                name: .userDidSignIn,
+                object: nil,
+                userInfo: ["user": user]
+            )
+        try? self.localStorage.saveUser(user)
+        self.toMain(index: 0)
+            // Navigate to main app screen
+            // Example:
+//            let mainViewController = MainViewController()
+//            navigationController?.setViewControllers([mainViewController], animated: true)
+        }
+       private func showSignInError(error: Error) {
+           let alert = UIAlertController(
+               title: "Sign In Error",
+               message: error.localizedDescription,
+               preferredStyle: .alert
+           )
+           
+           alert.addAction(UIAlertAction(title: "OK", style: .default))
+           present(alert, animated: true)
+       }
 }
 
 class PolicyDisclaimerLabel: UILabel {
@@ -171,4 +230,8 @@ class PolicyDisclaimerLabel: UILabel {
             }
         }
     }
+}
+
+extension Notification.Name {
+    static let userDidSignIn = Notification.Name("userDidSignIn")
 }

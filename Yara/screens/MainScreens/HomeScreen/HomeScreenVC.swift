@@ -1,5 +1,6 @@
 import UIKit
 import FirebaseFirestore
+import OneSignalFramework
 
 class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
@@ -24,7 +25,7 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         setupTableView()
         fetchApartments()
-        
+        requestNotificationsPermission()
         TapGestureRecognizer.addTapGesture(to: whatsappView) {
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let vc = sb.instantiateViewController(identifier: "BottomUpViewController") as! BottomUpViewController
@@ -32,6 +33,12 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             self.present(vc, animated: true)
         }
+    }
+    
+    func requestNotificationsPermission() {
+        OneSignal.Notifications.requestPermission({ accepted in
+          print("User accepted notifications: \(accepted)")
+        }, fallbackToSettings: true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -47,7 +54,7 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableView.showsHorizontalScrollIndicator = false
         
         // Performance optimizations
-        tableView.estimatedRowHeight = 428
+//        tableView.estimatedRowHeight = ScreenRatioHelper.adjustedHeight(410)
         tableView.layer.drawsAsynchronously = true
         tableView.contentInsetAdjustmentBehavior = .never
     }
@@ -78,6 +85,8 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 return Apartment(id: document.documentID, data: document.data())
             }
             
+            self.apartments = self.apartments.reversed()
+            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -90,9 +99,9 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         return apartments.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 428
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return ScreenRatioHelper.adjustedHeight(410)
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeScreenCell", for: indexPath)
@@ -113,7 +122,7 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             containerView.layer.cornerRadius = 20
         }
         
-        setupCarouselView(in: cell, with: apartment)
+        setupCarouselView(in: cell, with: apartment, index:indexPath)
         configureTitleLabel(in: cell, with: apartment)
         configureSubtitleLabel(in: cell, with: apartment)
         configurePriceButton(in: cell, with: apartment, at: indexPath)
@@ -167,7 +176,7 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    private func setupCarouselView(in cell: UITableViewCell, with apartment: Apartment) {
+    private func setupCarouselView(in cell: UITableViewCell, with apartment: Apartment, index: IndexPath) {
         guard let containerView = cell.viewWithTag(2) else {
             print("Error: Could not find view with tag 2")
             return
@@ -175,6 +184,8 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         // Clear existing content before reuse
         containerView.subviews.forEach { $0.removeFromSuperview() }
+        
+        containerView.heightAnchor.constraint(equalToConstant: ScreenRatioHelper.adjustedHeight(265)).isActive = true
         
         let carouselView = ImageCarouselView()
         carouselView.translatesAutoresizingMaskIntoConstraints = false
@@ -193,6 +204,10 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         loadImages(from: processedImageUrls) { [weak carouselView] images in
             carouselView?.configure(with: images, topLeftText: "\(apartment.unitsLeft) units left")
+        }
+        
+        _ = TapGestureRecognizer.addTapGesture(to: carouselView) { [self] in
+            self.navigateToDetails(for: index)
         }
     }
     

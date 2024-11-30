@@ -26,6 +26,8 @@ class ApplyScreen: UIViewController {
     
     @IBOutlet weak var whatsappView:UIView!
     
+    @IBOutlet weak var cell2Height: NSLayoutConstraint!
+    @IBOutlet weak var cellHeight: NSLayoutConstraint!
     var apartment: Apartment? = nil
     
     // Properties to store upload URLs
@@ -59,7 +61,9 @@ class ApplyScreen: UIViewController {
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.maximumDate = Date() // Don't allow future dates
+        self.cellHeight.constant = ScreenRatioHelper.adjustedHeight(50)
         
+        self.cell2Height.constant = ScreenRatioHelper.adjustedHeight(50)
         // Set date picker as input view for date of birth field
         dateOfBirthTextField.inputView = datePicker
         
@@ -181,7 +185,7 @@ class ApplyScreen: UIViewController {
         uploadButton.setTitle("Upload", for: .normal)
         uploadButton.titleLabel?.font = font
         uploadButton.setTitleColor(.black, for: .normal)
-        uploadButton.frame = CGRect(x: padding - 40, y: 0, width: buttonWidth, height: containerView.frame.height)
+        uploadButton.frame = CGRect(x: padding - 10, y: 0, width: buttonWidth, height: containerView.frame.height)
         uploadButton.tag = tag
         
         // Store reference to the button
@@ -320,8 +324,8 @@ class ApplyScreen: UIViewController {
 
 extension UITextField {
     func setConfigForApply() {
-        self.addDottedBorder(color: UIColor(hex: "#F7F7F7")!, lineWidth: 2, cornerRadius: 10, dashPattern: [4,4])
-        self.setLeftPaddingPoints(20)
+        self.addDottedBorder(color: UIColor(hex: "#F7F7F7")!, lineWidth: 2, cornerRadius: 12.5, dashPattern: [4,4])
+        self.setLeftPaddingPoints(30)
     }
 }
 

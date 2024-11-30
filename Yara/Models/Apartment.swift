@@ -49,8 +49,13 @@ struct Apartment: Identifiable {
             self.perMonth = "N/A"
         }
         
-        self.propertySize = data["property_size"] as? String ?? ""
-        self.serviceCharge = data["service_charge"] as? String ?? ""
+        let superscriptTwo = "\u{00B2}"
+        let m2 = "m" + superscriptTwo
+        let propertySize = data["property_size"] as? String ?? ""
+        self.propertySize = propertySize + " " + m2
+        
+        let serviceCharge = data["service_charge"] as? String ?? ""
+        self.serviceCharge = serviceCharge + m2
         
         // Handle units_left which might be Double or Int
         if let unitsLeftInt = data["units_left"] as? Int {

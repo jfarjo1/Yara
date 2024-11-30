@@ -47,7 +47,7 @@ class LastnameVC: UIViewController, UITextFieldDelegate {
         self.backButtonImage.image = UIImage(named: "back_arrow")
         
         titleLabel.text = "whats_lastname".localized
-        titleLabel.font = CustomFont.semiBoldFont(size: 33)
+        titleLabel.font = CustomFont.semiBoldFont(size: 30)
         
         lblSubTitle.text = "now_please_enter_last_name".localized
         lblSubTitle.font = CustomFont.semiBoldFont(size: 18)
