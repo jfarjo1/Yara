@@ -1,5 +1,5 @@
 {
-  "originHash" : "f7140d6a9e2cd0f9734efb79f16ed9f27639d6561d926195435a4e8577669320",
+  "originHash" : "8f500f94ea050b9ff4e634157b8219b506ca6aec859f0601457212a99c0f0440",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -17,6 +17,24 @@
       "state" : {
         "revision" : "87dd288fc792bf9751e522e171a47df5b783b0b8",
         "version" : "11.1.0"
+      }
+    },
+    {
+      "identity" : "countrypicker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SURYAKANTSHARMA/CountryPicker.git",
+      "state" : {
+        "revision" : "416404cce633a2039846ae2cb6951fd93cf7d588",
+        "version" : "4.0.0"
+      }
+    },
+    {
+      "identity" : "countrypickerview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kizitonwose/CountryPickerView.git",
+      "state" : {
+        "revision" : "6ecf22145d577411fb97c8c964df0fb5886f035f",
+        "version" : "3.3.0"
       }
     },
     {

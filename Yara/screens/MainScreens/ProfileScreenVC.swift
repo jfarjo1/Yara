@@ -98,28 +98,32 @@ class ProfileScreenVC: UIViewController {
         self.present(vc, animated: true)
     }
     
-    @IBAction func shareAppPressed(_ sender: Any) {
-        let urlString = "https://www.simly.io"
-        let linkToShare = [urlString]
-        let activityController = UIActivityViewController(activityItems: linkToShare, applicationActivities: nil)
-        present(activityController, animated: true, completion: nil)
-    }
+//    @IBAction func shareAppPressed(_ sender: Any) {
+//        let urlString = "https://www.simly.io"
+//        let linkToShare = [urlString]
+//        let activityController = UIActivityViewController(activityItems: linkToShare, applicationActivities: nil)
+//        present(activityController, animated: true, completion: nil)
+//    }
     
     @IBAction func helpPressed(_ sender: Any) {
         // Show Success Notif
-        guard let url = URL(string: "https://simly.io/help") else { return }
-        UIApplication.shared.open(url)
+//        guard let url = URL(string: "https://simly.io/help") else { return }
+//        UIApplication.shared.open(url)
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(identifier: "BottomUpViewController") as! BottomUpViewController
+        vc.modalTransitionStyle = .coverVertical
+        self.present(vc, animated: true)
     }
     
     @IBAction func privacyPressed(_ sender: Any) {
         // Show Success Notif
-        guard let url = URL(string: "https://simly.io/privacy") else { return }
+        guard let url = URL(string: "https://www.getyara.io/privacy") else { return }
         UIApplication.shared.open(url)
     }
     
     @IBAction func termsPressed(_ sender: Any) {
         // Show Success Notif
-        guard let url = URL(string: "https://simly.io/terms") else { return }
+        guard let url = URL(string: "https://www.getyara.io/terms") else { return }
         UIApplication.shared.open(url)
     }
     

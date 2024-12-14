@@ -57,92 +57,47 @@ class ItemDetailsScreenVC: UIViewController {
         setupUI(with: apartment)
     }
     
-//    private func updateUIWithApartment(_ apartment: Apartment) {
-//        // Update all content with actual data
-//        title_label.text = apartment.name
-//        title_label.font = CustomFont.semiBoldFont(size: 20)
-//        title_label.textColor = UIColor(hex: "#0A0908")
-//        // Price button text with safe formatting
-//        price_btn.setTitle("One time: \(apartment.oneTime)", for: .normal)
-//        
-//        // Monthly price with safe formatting
-//        price_label.text = "and \(apartment.perMonth) monthly"
-//        
-//        fullText = apartment.description
-//        
-//        description_textView.text = apartment.description
-//        
-//        // Update property details
-//        area_label.text = apartment.area
-//        property_label.text = apartment.propertySize
-//        bedrooms_label.text = apartment.bedrooms
-//        bathrooms_label.text = apartment.bathrooms
-//        service_label.text = apartment.serviceCharge
-//        
-//        location_Btn.setTitleColor(UIColor(hex: "#222222"), for: .normal)
-//        location_Btn.setTitle("Tap to view", for: .normal)
-//        location_Btn.titleLabel?.font = CustomFont.semiBoldFont(size: 14)
-//        
-//        let processedImageUrls = apartment.imageUrls.flatMap { urlString in
-//            urlString.split(separator: " ").map(String.init)
-//        }
-//        
-//        loadImages(from: processedImageUrls) { [weak self] images in
-//            guard let self = self else { return }
-//            if let carouselView = self.top_carousel.subviews.first as? ImageCarouselView {
-//                carouselView.hideTopLeftLabel()
-//                carouselView.configure(with: images, topLeftText: nil)
-//            }
-//        }
-//        calculateFullTextHeight()
-//    }
-    
     // Helper method to safely format currency values
     private func formatCurrency(_ value: Double) -> String {
         return String(format: "%.2f$", value)
     }
     
-//    private func setupCarouselWithApartmentImages(_ apartment: Apartment) {
-//        guard let containerView = top_carousel else {
-//            print("Error: Could not find carousel container view")
-//            return
-//        }
-//        
-//        let carouselView: ImageCarouselView
-//        if let existingCarouselView = containerView.subviews.first as? ImageCarouselView {
-//            carouselView = existingCarouselView
-//            carouselView.hideTopLeftLabel()
-//        } else {
-//            carouselView = ImageCarouselView()
-//            carouselView.translatesAutoresizingMaskIntoConstraints = false
-//            containerView.addSubview(carouselView)
-//            carouselView.hideTopLeftLabel()
-//            NSLayoutConstraint.activate([
-//                carouselView.topAnchor.constraint(equalTo: containerView.topAnchor),
-//                carouselView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-//                carouselView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-//                carouselView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
-//            ])
-//        }
-//        
-//        // Process image URLs (they seem to be space-separated in the string)
-//        let processedImageUrls = apartment.imageUrls.flatMap { urlString in
-//            urlString.split(separator: " ").map(String.init)
-//        }
-//        
-//        // Load images from URLs
-//        loadImages(from: processedImageUrls) { images in
-//            carouselView.configure(with: images, topLeftText: nil)
-//            carouselView.hideTopLeftLabel()
-//        }
-//    }
-    
-    private func loadImages(from urls: [String], completion: @escaping ([UIImage]) -> Void) {
+    private func loadFirstImage(from urls: [String], completion: @escaping (UIImage?) -> Void) {
+        // Check if there are any URLs
+        guard let firstUrlString = urls.first else {
+            completion(nil)
+            return
+        }
+        
+        guard let url = URL(string: firstUrlString) else {
+            completion(nil)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data,
+               let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    completion(image)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }
+        }.resume()
+    }
+
+    private func loadRemainingImages(from urls: [String], completion: @escaping ([UIImage]) -> Void) {
+        // Skip the first URL since it's already loaded
+        let remainingUrls = Array(urls.dropFirst())
         var images: [UIImage] = []
+        var loadedIndices: [Int: UIImage] = [:] // Keep track of order
         let group = DispatchGroup()
         
-        for urlString in urls {
+        for (index, urlString) in remainingUrls.enumerated() {
             group.enter()
+            
             guard let url = URL(string: urlString) else {
                 group.leave()
                 continue
@@ -151,13 +106,16 @@ class ItemDetailsScreenVC: UIViewController {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 defer { group.leave() }
                 
-                if let data = data, let image = UIImage(data: data) {
-                    images.append(image)
+                if let data = data,
+                   let image = UIImage(data: data) {
+                    loadedIndices[index] = image
                 }
             }.resume()
         }
         
         group.notify(queue: .main) {
+            // Reconstruct images in correct order
+            images = loadedIndices.sorted { $0.key < $1.key }.map { $0.value }
             completion(images)
         }
     }
@@ -237,12 +195,20 @@ class ItemDetailsScreenVC: UIViewController {
             let processedImageUrls = apartment.imageUrls.flatMap { urlString in
                 urlString.split(separator: " ").map(String.init)
             }
-            
-            loadImages(from: processedImageUrls) { [weak self] images in
+
+            loadFirstImage(from: processedImageUrls) { [weak self] firstImage in
                 guard let self = self else { return }
-                if let carouselView = self.top_carousel.subviews.first as? ImageCarouselView {
-                    carouselView.hideTopLeftLabel()
-                    carouselView.configure(with: images, topLeftText: nil)
+                if let firstImage = firstImage {
+                    if let carouselView = self.top_carousel.subviews.first as? ImageCarouselView {
+                        carouselView.hideTopLeftLabel()
+                        carouselView.configure(with: [firstImage], topLeftText: nil)
+                        
+                        // Load remaining images
+                        self.loadRemainingImages(from: processedImageUrls) { remainingImages in
+                            let allImages = [firstImage] + remainingImages
+                            carouselView.configure(with: allImages, topLeftText: nil)
+                        }
+                    }
                 }
             }
         }
@@ -353,8 +319,9 @@ class ItemDetailsScreenVC: UIViewController {
             ])
         }
         
-        let images = [UIImage(named: "onb_one_bg"), UIImage(named: "onb_two_bg"), UIImage(named: "onb_one_bg")].compactMap { $0 }
-        carouselView.configure(with: images, topLeftText: nil)
+//         Remove or comment out these lines
+         let images = [UIImage(named: "onb_one_bg"), UIImage(named: "onb_two_bg"), UIImage(named: "onb_one_bg")].compactMap { $0 }
+         carouselView.configure(with: images, topLeftText: nil)
         carouselView.hideTopLeftLabel()
     }
 }

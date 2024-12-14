@@ -1476,13 +1476,13 @@ Let's find you a new one! Reset it</string>
                                 </constraints>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="QdH-g3-vCz">
-                                <rect key="frame" x="36" y="75" width="180" height="42"/>
-                                <fontDescription key="fontDescription" name="Gilroy-ExtraBold" family="Gilroy" pointSize="42"/>
+                                <rect key="frame" x="36" y="76" width="154.33333333333334" height="36"/>
+                                <fontDescription key="fontDescription" name="Gilroy-ExtraBold" family="Gilroy" pointSize="36"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGz-nI-Hx4">
-                                <rect key="frame" x="376" y="76" width="40" height="40"/>
+                                <rect key="frame" x="376" y="74" width="40" height="40"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="omh-kV-431">
                                         <rect key="frame" x="11" y="11" width="18" height="18"/>
@@ -1513,7 +1513,7 @@ Let's find you a new one! Reset it</string>
                             <constraint firstItem="lRa-Gn-4fB" firstAttribute="trailing" secondItem="jVS-yv-xfW" secondAttribute="trailing" id="87f-Y0-s9j"/>
                             <constraint firstItem="lRa-Gn-4fB" firstAttribute="trailing" secondItem="iGz-nI-Hx4" secondAttribute="trailing" constant="24" id="K7Q-pn-gRg"/>
                             <constraint firstItem="lRa-Gn-4fB" firstAttribute="bottom" secondItem="jVS-yv-xfW" secondAttribute="bottom" id="QeJ-LH-czC"/>
-                            <constraint firstItem="QdH-g3-vCz" firstAttribute="top" secondItem="zdD-lw-99f" secondAttribute="top" constant="75" id="dda-ef-6FX"/>
+                            <constraint firstItem="QdH-g3-vCz" firstAttribute="top" secondItem="zdD-lw-99f" secondAttribute="top" constant="76" id="dda-ef-6FX"/>
                             <constraint firstItem="iGz-nI-Hx4" firstAttribute="centerY" secondItem="QdH-g3-vCz" secondAttribute="centerY" id="mEr-J1-l3l"/>
                             <constraint firstItem="jVS-yv-xfW" firstAttribute="top" secondItem="lRa-Gn-4fB" secondAttribute="top" constant="20" id="nTB-1N-qNd"/>
                             <constraint firstItem="QdH-g3-vCz" firstAttribute="leading" secondItem="lRa-Gn-4fB" secondAttribute="leading" constant="36" id="xue-Rp-Tzk"/>
@@ -1571,7 +1571,7 @@ Let's find you a new one! Reset it</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuD-e5-kjR">
-                                <rect key="frame" x="0.0" y="114" width="440" height="759"/>
+                                <rect key="frame" x="0.0" y="115" width="440" height="758"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeScreenCell" rowHeight="431" id="COi-7K-rg6">
                                         <rect key="frame" x="0.0" y="50" width="440" height="431"/>
@@ -1665,14 +1665,14 @@ Let's find you a new one! Reset it</string>
                                 <sections/>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_title" translatesAutoresizingMaskIntoConstraints="NO" id="Bnj-g8-YNw">
-                                <rect key="frame" x="23" y="75" width="93" height="23"/>
+                                <rect key="frame" x="23" y="76" width="93" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="9R2-nh-N54"/>
                                     <constraint firstAttribute="width" constant="93" id="o49-sj-UqF"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKO-xb-hij">
-                                <rect key="frame" x="376" y="66.666666666666671" width="40" height="40"/>
+                                <rect key="frame" x="376" y="67.666666666666671" width="40" height="40"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="8Iu-B1-SDH">
                                         <rect key="frame" x="11" y="11" width="18" height="18"/>
@@ -1703,7 +1703,7 @@ Let's find you a new one! Reset it</string>
                             <constraint firstItem="VuD-e5-kjR" firstAttribute="bottom" secondItem="oFi-KK-PE6" secondAttribute="bottom" id="4XK-jc-xpF"/>
                             <constraint firstItem="Bnj-g8-YNw" firstAttribute="leading" secondItem="oFi-KK-PE6" secondAttribute="leading" constant="23" id="4u9-lb-Z6c"/>
                             <constraint firstItem="VuD-e5-kjR" firstAttribute="centerX" secondItem="hx3-OT-Ugm" secondAttribute="centerX" id="CMv-HD-e0D"/>
-                            <constraint firstItem="Bnj-g8-YNw" firstAttribute="top" secondItem="hx3-OT-Ugm" secondAttribute="top" constant="75" id="Fhf-Vd-ePj"/>
+                            <constraint firstItem="Bnj-g8-YNw" firstAttribute="top" secondItem="hx3-OT-Ugm" secondAttribute="top" constant="76" id="Fhf-Vd-ePj"/>
                             <constraint firstItem="VuD-e5-kjR" firstAttribute="trailing" secondItem="oFi-KK-PE6" secondAttribute="trailing" id="HDj-9s-gH7"/>
                             <constraint firstItem="VuD-e5-kjR" firstAttribute="leading" secondItem="oFi-KK-PE6" secondAttribute="leading" id="T5n-8P-hgs"/>
                             <constraint firstItem="oFi-KK-PE6" firstAttribute="trailing" secondItem="SKO-xb-hij" secondAttribute="trailing" constant="24" id="WOD-BJ-dJl"/>
@@ -2472,7 +2472,7 @@ Let's find you a new one! Reset it</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGe-MP-MVZ">
-                                <rect key="frame" x="0.0" y="110" width="440" height="722"/>
+                                <rect key="frame" x="0.0" y="110" width="112" height="722"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YVP-DH-Isu">
                                         <rect key="frame" x="0.0" y="0.0" width="425" height="615"/>
@@ -2519,11 +2519,35 @@ Let's find you a new one! Reset it</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOm-Bd-6Bx">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGm-Dc-1g8">
                                                         <rect key="frame" x="0.0" y="406" width="385" height="50"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                                                    </textField>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="R4p-09-ICR">
+                                                                <rect key="frame" x="30" y="0.0" width="355" height="50"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tfd-Vq-oSx" customClass="CountryPickerView" customModule="CountryPickerView">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="50" id="BYM-9E-qhx"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOm-Bd-6Bx" customClass="PhoneNumberTextField" customModule="PhoneNumberKit">
+                                                                        <rect key="frame" x="70" y="15.666666666666631" width="285" height="18.666666666666679"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                                    </textField>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="R4p-09-ICR" secondAttribute="trailing" id="1ZY-Q8-qfT"/>
+                                                            <constraint firstItem="R4p-09-ICR" firstAttribute="leading" secondItem="OGm-Dc-1g8" secondAttribute="leading" constant="30" id="AxU-tH-Bda"/>
+                                                            <constraint firstAttribute="bottom" secondItem="R4p-09-ICR" secondAttribute="bottom" id="FpD-pk-SYc"/>
+                                                            <constraint firstItem="R4p-09-ICR" firstAttribute="top" secondItem="OGm-Dc-1g8" secondAttribute="top" id="Lly-tE-XB0"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVk-SQ-IG2">
@@ -2557,7 +2581,7 @@ Let's find you a new one! Reset it</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JJa-QN-Nhw">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JJa-QN-Nhw">
                                                         <rect key="frame" x="0.0" y="58" width="385" height="50"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
@@ -2593,10 +2617,10 @@ Let's find you a new one! Reset it</string>
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QA0-nY-NKC">
-                                <rect key="frame" x="0.0" y="832" width="440" height="112"/>
+                                <rect key="frame" x="0.0" y="832" width="112" height="112"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ab-E1-dNr">
-                                        <rect key="frame" x="20" y="20" width="400" height="45"/>
+                                        <rect key="frame" x="20" y="20" width="72" height="45"/>
                                         <color key="backgroundColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Vq8-cR-Ld2"/>
@@ -2605,7 +2629,7 @@ Let's find you a new one! Reset it</string>
                                         <state key="normal" title="Buy Now"/>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Col-el-niA">
-                                        <rect key="frame" x="74.333333333333329" y="77" width="291.33333333333331" height="15"/>
+                                        <rect key="frame" x="-89.666666666666671" y="77" width="291.33333333333331" height="15"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tinder" translatesAutoresizingMaskIntoConstraints="NO" id="Dy3-tT-YYo">
                                                 <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
@@ -2640,7 +2664,7 @@ Let's find you a new one! Reset it</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZF-CT-0s2">
-                                <rect key="frame" x="376" y="72.666666666666671" width="40" height="40"/>
+                                <rect key="frame" x="48" y="72.666666666666671" width="40" height="40"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="neh-ri-wZ6">
                                         <rect key="frame" x="11" y="11" width="18" height="18"/>
@@ -2700,7 +2724,9 @@ Let's find you a new one! Reset it</string>
                         <outlet property="learnMoreLabel" destination="Qdh-kc-6AA" id="glp-EV-oHw"/>
                         <outlet property="monthlySalaryTextField" destination="NxW-5Y-m9d" id="3lK-c1-toV"/>
                         <outlet property="nationalityTextField" destination="zLe-Ky-1lo" id="V3a-u3-SOg"/>
-                        <outlet property="phoneNumberTextField" destination="bOm-Bd-6Bx" id="VBa-vX-Tep"/>
+                        <outlet property="phoneNumberCountryPicker" destination="tfd-Vq-oSx" id="9yZ-N3-eoZ"/>
+                        <outlet property="phoneNumberTextField" destination="bOm-Bd-6Bx" id="BdZ-E1-kr9"/>
+                        <outlet property="phoneNumberView" destination="OGm-Dc-1g8" id="HhB-QM-F1W"/>
                         <outlet property="titleLabel" destination="aUd-Fq-dvF" id="oMz-Tn-Wod"/>
                         <outlet property="whatsappView" destination="YZF-CT-0s2" id="vkE-oS-Ljt"/>
                     </connections>
@@ -3809,13 +3835,13 @@ Let's find you a new one! Reset it</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="underPageBackgroundColor">
             <color red="0.70980392156862748" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

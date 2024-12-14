@@ -188,7 +188,7 @@ extension BottomUpViewController: UITableViewDataSource, UITableViewDelegate, MF
             
             guard let uid = Auth.auth().currentUser?.uid else {return}
             
-            guard let url = URL(string: " https://bit.ly/yara-live-chat") else { return }
+            guard let url = URL(string: "https://bit.ly/yara-live-chat") else { return }
             UIApplication.shared.open(url)
         } else if indexPath.row == 1 {
             openGmailCompose(to: "hello@getyara.io")

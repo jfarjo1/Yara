@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13007F232D0DA8DA008A52F9 /* CountryPickerView in Frameworks */ = {isa = PBXBuildFile; productRef = 13007F222D0DA8DA008A52F9 /* CountryPickerView */; };
+		13007F262D0DB599008A52F9 /* CountryPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 13007F252D0DB599008A52F9 /* CountryPicker */; };
 		130ED3392CBF0254006E70B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 130ED3382CBF0254006E70B6 /* Lottie */; };
 		130ED3502CBF1137006E70B6 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 130ED34F2CBF1137006E70B6 /* NVActivityIndicatorView */; };
 		130ED3522CBF1137006E70B6 /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = 130ED3512CBF1137006E70B6 /* NVActivityIndicatorViewExtended */; };
@@ -114,6 +116,7 @@
 				13D0AAF62CBA7CDD001F458E /* FirebaseDatabase in Frameworks */,
 				136C0A122CF7DDED004CF646 /* OneSignalInAppMessages in Frameworks */,
 				13D0AAFE2CBA7CDD001F458E /* FirebasePerformance in Frameworks */,
+				13007F232D0DA8DA008A52F9 /* CountryPickerView in Frameworks */,
 				13D0AAEE2CBA7CDD001F458E /* FirebaseAppCheck in Frameworks */,
 				130ED3392CBF0254006E70B6 /* Lottie in Frameworks */,
 				130ED3522CBF1137006E70B6 /* NVActivityIndicatorViewExtended in Frameworks */,
@@ -126,6 +129,7 @@
 				13D0AAF22CBA7CDD001F458E /* FirebaseCore in Frameworks */,
 				13D0AAEC2CBA7CDD001F458E /* FirebaseAnalytics in Frameworks */,
 				136C0A102CF7DDED004CF646 /* OneSignalFramework in Frameworks */,
+				13007F262D0DB599008A52F9 /* CountryPicker in Frameworks */,
 				13D0AAF82CBA7CDD001F458E /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,6 +219,8 @@
 				13CE72E12CCD1BBE00348B2B /* ViewAnimator */,
 				136C0A0F2CF7DDED004CF646 /* OneSignalFramework */,
 				136C0A112CF7DDED004CF646 /* OneSignalInAppMessages */,
+				13007F222D0DA8DA008A52F9 /* CountryPickerView */,
+				13007F252D0DB599008A52F9 /* CountryPicker */,
 			);
 			productName = Yara;
 			productReference = 13D0AACD2CBA778F001F458E /* Yara.app */;
@@ -254,6 +260,8 @@
 				130ED34E2CBF1137006E70B6 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 				13CE72E02CCD1BBE00348B2B /* XCRemoteSwiftPackageReference "ViewAnimator" */,
 				136C0A0C2CF7DDED004CF646 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+				13007F212D0DA8DA008A52F9 /* XCRemoteSwiftPackageReference "CountryPickerView" */,
+				13007F242D0DB599008A52F9 /* XCRemoteSwiftPackageReference "CountryPicker" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 13D0AACE2CBA778F001F458E /* Products */;
@@ -381,7 +389,7 @@
 				CODE_SIGN_ENTITLEMENTS = Yara/Yara.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = VDUR488J5N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Yara/Info.plist;
@@ -414,7 +422,7 @@
 				CODE_SIGN_ENTITLEMENTS = Yara/Yara.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = VDUR488J5N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Yara/Info.plist;
@@ -591,6 +599,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		13007F212D0DA8DA008A52F9 /* XCRemoteSwiftPackageReference "CountryPickerView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kizitonwose/CountryPickerView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.0;
+			};
+		};
+		13007F242D0DB599008A52F9 /* XCRemoteSwiftPackageReference "CountryPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SURYAKANTSHARMA/CountryPicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		130ED3372CBF0254006E70B6 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -642,6 +666,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		13007F222D0DA8DA008A52F9 /* CountryPickerView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 13007F212D0DA8DA008A52F9 /* XCRemoteSwiftPackageReference "CountryPickerView" */;
+			productName = CountryPickerView;
+		};
+		13007F252D0DB599008A52F9 /* CountryPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 13007F242D0DB599008A52F9 /* XCRemoteSwiftPackageReference "CountryPicker" */;
+			productName = CountryPicker;
+		};
 		130ED3382CBF0254006E70B6 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 130ED3372CBF0254006E70B6 /* XCRemoteSwiftPackageReference "lottie-ios" */;

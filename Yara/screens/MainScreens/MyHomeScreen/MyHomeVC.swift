@@ -134,13 +134,17 @@ class MyHomeVC: UIViewController {
         }
         
         TapGestureRecognizer.addTapGesture(to: element_two_button) {
-            guard let url = URL(string: "https://www.getyara.io/terms") else { return }
-            UIApplication.shared.open(url)
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(identifier: "BottomUpViewController") as! BottomUpViewController
+            
+            self.present(vc, animated: true)
         }
         
         TapGestureRecognizer.addTapGesture(to: element_three_button) {
-            guard let url = URL(string: "google.com") else { return }
-            UIApplication.shared.open(url)
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(identifier: "BottomUpViewController") as! BottomUpViewController
+            
+            self.present(vc, animated: true)
         }
     }
     

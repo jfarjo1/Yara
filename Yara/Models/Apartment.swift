@@ -28,7 +28,10 @@ struct Apartment: Identifiable {
         self.bathrooms = data["bathrooms"] as? String ?? ""
         self.bedrooms = data["bedrooms"] as? String ?? ""
         self.description = data["description"] as? String ?? ""
-        self.imageUrls = data["image_urls"] as? [String] ?? []
+//        self.imageUrls = (data["image_urls"] as? [String] ?? []).reversed()
+        
+        self.imageUrls = (data["image_urls"] as? [String] ?? []).reversed()
+        
         self.location = data["location"] as? String ?? ""
         self.locationName = data["location_name"] as? String ?? ""
         

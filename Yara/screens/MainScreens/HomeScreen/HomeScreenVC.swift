@@ -84,9 +84,7 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             self.apartments = documents.map { document in
                 return Apartment(id: document.documentID, data: document.data())
             }
-            
-            self.apartments = self.apartments.reversed()
-            
+                        
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -202,8 +200,29 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             urlString.split(separator: " ").map(String.init)
         }
         
-        loadImages(from: processedImageUrls) { [weak carouselView] images in
-            carouselView?.configure(with: images, topLeftText: "\(apartment.unitsLeft) units left")
+        loadFirstImage(from: processedImageUrls) { [weak carouselView] image in
+            if let image = image {
+                // Configure carousel with first image
+                carouselView?.configure(with: [image], topLeftText: "\(apartment.unitsLeft) units left")
+                
+                // Now load remaining images
+                self.loadRemainingImages(from: processedImageUrls) { remainingImages in
+                    // Create final array without duplicates, maintaining order
+                    var allImages: [UIImage] = [image]
+                    for newImage in remainingImages {
+                        // Only add if it's not already in the array
+                        if !allImages.contains(where: { $0 === newImage }) {
+                            allImages.append(newImage)
+                        }
+                    }
+                    
+                    // Update carousel with deduplicated images
+                    carouselView?.configure(with: allImages,
+                                          topLeftText: "\(apartment.unitsLeft) units left")
+                }
+            } else {
+                carouselView?.configure(with: [], topLeftText: "\(apartment.unitsLeft) units left")
+            }
         }
         
         _ = TapGestureRecognizer.addTapGesture(to: carouselView) { [self] in
@@ -211,11 +230,52 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    private func loadImages(from urls: [String], completion: @escaping ([UIImage]) -> Void) {
+    private func loadFirstImage(from urls: [String], completion: @escaping (UIImage?) -> Void) {
+        // Check if there are any URLs
+        guard let firstUrlString = urls.first else {
+            completion(nil)
+            return
+        }
+        
+        // Check cache first
+        if let cachedImage = Self.imageCache.object(forKey: firstUrlString as NSString) {
+            completion(cachedImage)
+            return
+        }
+        
+        // Create URL
+        guard let url = URL(string: firstUrlString) else {
+            completion(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data,
+               let image = UIImage(data: data) {
+                // Cache the image
+                Self.imageCache.setObject(image, forKey: firstUrlString as NSString)
+                
+                DispatchQueue.main.async {
+                    completion(image)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }
+        }
+        
+        imageTasks.append(task)
+        task.resume()
+    }
+
+    private func loadRemainingImages(from urls: [String], completion: @escaping ([UIImage]) -> Void) {
+        // Skip the first URL since it's already loaded
+        let remainingUrls = Array(urls.dropFirst())
         var images: [UIImage] = []
         let group = DispatchGroup()
         
-        for urlString in urls {
+        for urlString in remainingUrls {
             group.enter()
             
             // Check cache first
@@ -248,6 +308,52 @@ class HomeScreenVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         group.notify(queue: .main) {
             completion(images)
         }
+    }
+    
+    private func loadImages(from urls: [String], completion: @escaping ([UIImage]) -> Void) {
+        var images: [UIImage] = []
+        
+        // Helper function to load images recursively
+        func loadNextImage(at index: Int) {
+            // Base case: if we've processed all URLs, call completion
+            guard index < urls.count else {
+                DispatchQueue.main.async {
+                    completion(images)
+                }
+                return
+            }
+            
+            let urlString = urls[index]
+            
+            // Check cache first
+            if let cachedImage = Self.imageCache.object(forKey: urlString as NSString) {
+                images.append(cachedImage)
+                loadNextImage(at: index + 1)
+                return
+            }
+            
+            guard let url = URL(string: urlString) else {
+                loadNextImage(at: index + 1)
+                return
+            }
+            
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data,
+                   let image = UIImage(data: data) {
+                    // Cache the image
+                    Self.imageCache.setObject(image, forKey: urlString as NSString)
+                    images.append(image)
+                }
+                
+                loadNextImage(at: index + 1)
+            }
+            
+            imageTasks.append(task)
+            task.resume()
+        }
+        
+        // Start loading from the first image
+        loadNextImage(at: 0)
     }
     
     private func navigateToDetails(for indexPath: IndexPath) {

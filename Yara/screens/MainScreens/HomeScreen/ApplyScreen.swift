@@ -2,6 +2,7 @@ import UIKit
 import FirebaseStorage
 import FirebaseAuth
 import FirebaseFirestore
+import CountryPickerView
 
 class ApplyScreen: UIViewController {
     
@@ -15,7 +16,8 @@ class ApplyScreen: UIViewController {
     @IBOutlet weak var monthlySalaryTextField: UITextField!
     @IBOutlet weak var nationalityTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
-    
+    @IBOutlet weak var phoneNumberView: UIView!
+    @IBOutlet weak var phoneNumberCountryPicker: CountryPickerView!
     @IBOutlet weak var emiratesIDFrontTextField: UITextField!
     @IBOutlet weak var emiratesIDBackTextField: UITextField!
     
@@ -40,6 +42,12 @@ class ApplyScreen: UIViewController {
     private var emiratesIDBackButton: UIButton?
     private var bankStatementButton: UIButton?
     
+    // Properties for keyboard handling
+    private var activeTextField: UITextField?
+    private var originalViewFrame: CGRect?
+    
+    var selectedCountry: Country?
+    
     enum UploadType {
         case front
         case back
@@ -54,6 +62,75 @@ class ApplyScreen: UIViewController {
         setupDatePicker()
         setupNumberPads()
         addDoneButtonOnKeyboard()
+        setupKeyboardHandling()
+        setupTextFieldDelegates()
+    }
+    
+    private func setupKeyboardHandling() {
+        // Store original frame
+        originalViewFrame = view.frame
+        
+        // Register for keyboard notifications
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    private func setupTextFieldDelegates() {
+        // Assign delegates to all text fields
+        let textFields: [UITextField] = [
+            firstNameTextField,
+            lastNameTextField,
+            dateOfBirthTextField,
+            employmentStatusTextField,
+            addressTextField,
+            monthlySalaryTextField,
+            nationalityTextField,
+            phoneNumberTextField,
+            emiratesIDFrontTextField,
+            emiratesIDBackTextField
+        ]
+        
+        textFields.forEach { $0.delegate = self }
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let activeTextField = activeTextField else { return }
+        
+        // Calculate the text field's bottom position
+        let textFieldFrame = activeTextField.convert(activeTextField.bounds, to: view)
+        let textFieldBottom = textFieldFrame.origin.y + textFieldFrame.height
+        
+        // Calculate the distance between the text field's bottom and keyboard's top
+        let keyboardTop = view.frame.height - keyboardFrame.height
+        let distance = textFieldBottom - keyboardTop
+        
+        // If text field is hidden by keyboard, move the view up
+        if distance > 0 {
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin.y = -distance - 20 // Added 20pt padding
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        // Reset view position
+        guard let originalFrame = originalViewFrame else { return }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame = originalFrame
+        }
     }
     
     private func setupDatePicker() {
@@ -87,7 +164,6 @@ class ApplyScreen: UIViewController {
     }
     
     func setupUI() {
-        
         TapGestureRecognizer.addTapGesture(to: whatsappView) {
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let vc = sb.instantiateViewController(identifier: "BottomUpViewController") as! BottomUpViewController
@@ -128,9 +204,18 @@ class ApplyScreen: UIViewController {
         self.nationalityTextField.placeholder = "Nationality"
         self.nationalityTextField.font = CustomFont.semiBoldFont(size: 14)
         
-        self.phoneNumberTextField.setConfigForApply()
+        self.phoneNumberView.addDottedBorderView(color: UIColor(hex: "#F7F7F7")!, lineWidth: 2, cornerRadius: 12.5, dashPattern: [4,4])
         self.phoneNumberTextField.placeholder = "Phone Number"
         self.phoneNumberTextField.font = CustomFont.semiBoldFont(size: 14)
+        
+        self.phoneNumberCountryPicker.textColor = .lightGray
+        self.phoneNumberCountryPicker.showCountryCodeInView = false
+        self.phoneNumberCountryPicker.showCountryNameInView = false
+        self.phoneNumberCountryPicker.font = CustomFont.semiBoldFont(size: 14)
+        self.phoneNumberCountryPicker.delegate = self
+        self.phoneNumberCountryPicker.dataSource = self
+        self.phoneNumberCountryPicker.hostViewController = self
+        self.selectedCountry = self.phoneNumberCountryPicker.selectedCountry
         
         self.emiratesIDFrontTextField.setConfigForApply()
         self.emiratesIDFrontTextField.placeholder = "Emirates ID Front"
@@ -141,7 +226,7 @@ class ApplyScreen: UIViewController {
         self.emiratesIDBackTextField.placeholder = "Emirates ID Back"
         self.emiratesIDBackTextField.font = CustomFont.semiBoldFont(size: 14)
         self.addUploadButton(textField: self.emiratesIDBackTextField, tag: 2)
-                
+        
         self.applyButton.layer.cornerRadius = 45/2
         self.applyButton.clipsToBounds = true
         self.applyButton.setTitle("Submit", for: .normal)
@@ -185,7 +270,7 @@ class ApplyScreen: UIViewController {
         uploadButton.setTitle("Upload", for: .normal)
         uploadButton.titleLabel?.font = font
         uploadButton.setTitleColor(.black, for: .normal)
-        uploadButton.frame = CGRect(x: padding - 10, y: 0, width: buttonWidth, height: containerView.frame.height)
+        uploadButton.frame = CGRect(x: padding - 20, y: 0, width: buttonWidth, height: containerView.frame.height)
         uploadButton.tag = tag
         
         // Store reference to the button
@@ -234,6 +319,8 @@ class ApplyScreen: UIViewController {
             return false
         }
         
+        let formattedPhoneNumber = "\(selectedCountry?.phoneCode ?? "")\(phoneNumber)"
+        
         // Submit the application
         submitApplication(
             firstName: firstName,
@@ -243,7 +330,7 @@ class ApplyScreen: UIViewController {
             address: address,
             monthlySalary: monthlySalary,
             nationality: nationality,
-            phoneNumber: phoneNumber,
+            phoneNumber: formattedPhoneNumber,
             emiratesIDFrontURL: emiratesIDFrontURL ?? "",
             emiratesIDBackURL: emiratesIDBackURL ?? "",
             bankStatementURL: bankStatementURL ?? ""
@@ -320,12 +407,41 @@ class ApplyScreen: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
+    
+    deinit {
+        // Remove observers when view controller is deallocated
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 extension UITextField {
     func setConfigForApply() {
         self.addDottedBorder(color: UIColor(hex: "#F7F7F7")!, lineWidth: 2, cornerRadius: 12.5, dashPattern: [4,4])
         self.setLeftPaddingPoints(30)
+    }
+}
+
+extension ApplyScreen: CountryPickerViewDelegate, CountryPickerViewDataSource {
+    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
+        self.selectedCountry = country
+    }
+    
+    func cellLabelFont(in countryPickerView: CountryPickerView) -> UIFont {
+        return CustomFont.semiBoldFont(size: 14)
+    }
+    
+    func cellImageViewSize(in countryPickerView: CountryPickerView) -> CGSize {
+        return CGSize(width: 20, height: 20)
+    }
+    
+    
+    
+    func navigationTitle(in countryPickerView: CountryPickerView) -> String? {
+        return "Select Country"
+    }
+    
+    func showPhoneCodeInList(in countryPickerView: CountryPickerView) -> Bool {
+        return true
     }
 }
 
@@ -421,6 +537,22 @@ extension ApplyScreen: UIImagePickerControllerDelegate, UINavigationControllerDe
         picker.dismiss(animated: true)
     }
 }
+
+extension ApplyScreen: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeTextField = nil
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
 extension ApplyScreen {
     func addDoneButtonOnKeyboard() {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))

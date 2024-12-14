@@ -136,17 +136,17 @@ class ImageCarouselView: UIView {
                 imageView.leadingAnchor.constraint(equalTo: imageViews[index - 1].trailingAnchor).isActive = true
             }
             
-            if index == images.count - 1 {
+            if index == images.count - 2{
                 imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
             }
         }
         
-        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(images.count)).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(images.count-1)).isActive = true
         
         // Set the content size explicitly
-        scrollView.contentSize = CGSize(width: scrollView.frame.width * CGFloat(images.count), height: scrollView.frame.height)
+        scrollView.contentSize = CGSize(width: scrollView.frame.width * CGFloat(images.count-1), height: scrollView.frame.height)
         
-        pageControl.numberOfPages = images.count
+        pageControl.numberOfPages = images.count-1
         
         if let topLeftText = topLeftText {
             topLeftLabel.text = topLeftText
@@ -172,14 +172,24 @@ class ImageCarouselView: UIView {
         super.layoutSubviews()
         
         // Ensure content size is correct after layout
-        scrollView.contentSize = CGSize(width: scrollView.frame.width * CGFloat(imageViews.count), height: scrollView.frame.height)
+        scrollView.contentSize = CGSize(width: scrollView.frame.width * CGFloat(imageViews.count-1), height: scrollView.frame.height)
     }
 }
 
 extension ImageCarouselView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let pageIndex = round(scrollView.contentOffset.x / scrollView.frame.width)
-        pageControl.currentPage = Int(pageIndex)
+        // Guard against zero width to prevent NaN
+        guard scrollView.frame.width > 0 else { return }
+        
+        // Calculate page index safely
+        let width = scrollView.frame.width
+        let offsetX = scrollView.contentOffset.x
+        let pageIndex = width > 0 ? Int(round(offsetX / width)) : 0
+        
+        // Ensure pageIndex is within bounds
+        if pageIndex >= 0 && pageIndex < Int(pageControl.numberOfPages) {
+            pageControl.currentPage = pageIndex
+        }
         
         // Force horizontal-only scrolling
         if scrollView.contentOffset.y != 0 {
